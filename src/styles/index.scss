@@ -1,0 +1,53 @@
+body {
+  background-color: rgb(13, 165, 206);
+}
+
+.app {
+  max-width: 1024px;
+  padding: 0 2rem;
+  margin: 0 auto;
+}
+
+.search {
+    position: absolute;
+    top: 50%;
+    left: 0rem;
+    transform: translateY(-50%) translateX(-100%);
+    opacity: 0;
+    transition: all 0.5s linear;
+
+    &.open {
+        opacity: 1;
+        transform: translateY(-50%);
+    }
+}
+
+.searchinput {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 1px;
+    transform: translateY(-50%) translateX(-100%);
+    opacity: 0;
+    transition: all 0.5s linear;
+
+    &.open {
+        left: 2.5rem;
+        opacity: 1;
+        transform: translateY(-50%);
+        width: 230px;
+
+        @media (min-width: 450px) { 
+            width: 288px;
+        }
+    }
+}
+
+.playicon {
+    opacity: 0;
+    transition: all 0.5s linear;
+
+    &.open {
+        opacity: 1;
+    }
+}
