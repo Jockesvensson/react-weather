@@ -27,7 +27,6 @@ const Startpage = () => {
     useState<number>();
   const [forecastCurrentDayWindSpeed, setForecastCurrentDayWindSpeed] =
     useState<number>();
-  const [geolocationData, setGeolocationData] = useState<any>();
   const [forecastCurrentDayUVI, setForecastCurrentDayUVI] = useState<number>();
   const [currentWeatherData, setCurrentWeatherData] = useState<any>([]);
   const [currentWeatherIcon, setCurrentWeatherIcon] = useState<string>("");
