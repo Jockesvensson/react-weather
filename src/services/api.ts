@@ -60,7 +60,7 @@ const getForecastWeekData = (setForecastWeekData, lat, lon) => {
 }
 
 const getGeolocationData = (setLat, setLon, search) => {
-    const url = `http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=1&appid=${REACT_APP_API_KEY}`
+    const url = `https://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=1&appid=${REACT_APP_API_KEY}`
     fetch(url)
         .then((res) => res.json())
         .then((json) => {
