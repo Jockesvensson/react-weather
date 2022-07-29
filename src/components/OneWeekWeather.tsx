@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import OpacityIcon from "@mui/icons-material/Opacity";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 import "moment/locale/sv";
 
 const OneWeekWeather = ({ forecastWeekData }) => {
+  const navigate = useNavigate();
+
+  const handleWeatherDay = (item, day) => {
+    navigate(`/weather/${day}`, { state: { item } });
+  };
+
   return (
     <div className="flex flex-col mt-4 py-4 px-4 xsm:px-8 bg-sky-300 border-sky-200 border-2 rounded-3xl text-white">
       {forecastWeekData.map((item, index) => {
@@ -14,15 +21,17 @@ const OneWeekWeather = ({ forecastWeekData }) => {
           day = "idag";
         }
         return (
-          <div className="flex justify-between items-center" key={index}>
-            <div className="w-1/5 text-sm xsm:text-base">{day}</div>
-            {item.humidity ? (
-              <div className="flex flex-col xsm:flex-row items-center w-1/5 text-right">
-                <OpacityIcon sx={{ fontSize: 12, marginRight: "0.2rem" }} />
-                <div className="text-xs">{item.humidity} %</div>
+          <div
+            className="flex justify-between items-center"
+            key={index}
+          >
+            <div className="w-1/5 text-sm xsm:text-base cursor-pointer capitalize" onClick={() => handleWeatherDay(item, day)}>{day}</div>
+            <div className="flex flex-col xsm:flex-row items-center w-1/5 text-right">
+              <OpacityIcon sx={{ fontSize: 12, marginRight: "0.2rem" }} />
+              <div className="text-xs">
+                {item.rain ? item.rain.toFixed(0) + "%" : "0 %"}
               </div>
-            ) : null}
-
+            </div>
             {item.weather.map((item, index) =>
               item.icon ? (
                 <img

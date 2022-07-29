@@ -44,7 +44,7 @@ const getForecastTwentyFourHoursData = (setForecastTwentyFourHoursData, lat, lon
     fetch(url)
         .then((res) => res.json())
         .then((json) => {
-            // console.log("logg i backlog: ", json.hourly.slice(0, 24));
+            console.log("logg i backlog: ", json.hourly.slice(0, 24));
             setForecastTwentyFourHoursData(json.hourly.slice(0, 24));
         })
 }

@@ -34,11 +34,11 @@ const SearchLocation = ({ searchOpen, setSearchOpen, setLat, setLon }) => {
         }}
         onKeyDown={(e) => handleKeyPress(e)}
       />
-      <PlayArrowIcon
+      {/* <PlayArrowIcon
         className={`absolute top-1/2 left-60 xsm:left-76 -translate-y-1/2 text-black ${setPlayclass}`}
         sx={{ fontSize: 30, cursor: "pointer" }}
         onClick={() => searchFilter()}
-      />
+      /> */}
       </div>
     </div>
   );

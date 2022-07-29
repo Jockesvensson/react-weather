@@ -44,10 +44,10 @@ const DayHourWeather = ({ forecastTwentyFourHoursData }) => {
                 />
               ))}
               <div className="my-1 text-lg">{item.temp ? item.temp.toFixed(0) : ''}°</div>
-              <div className="flex items-center text-xs">
+              {/* <div className="flex items-center text-xs">
                 <OpacityIcon sx={{ fontSize: 14, marginRight: '0.2rem' }} />
                 <div>{item.humidity} %</div>
-              </div>
+              </div> */}
             </div>
           );
         })}

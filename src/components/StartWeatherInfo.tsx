@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import RoomIcon from "@mui/icons-material/Room";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 import moment from "moment";
 import "moment/locale/sv";
 import SearchLocation from "./SearchLocation";
+import CloseIcon from "@mui/icons-material/Close";
 
 const StartWeatherInfo = ({
   cityData,
@@ -13,7 +14,7 @@ const StartWeatherInfo = ({
   currentWeatherIcon,
   currentWeatherIconDescription,
   setLat,
-  setLon
+  setLon,
 }) => {
   moment.locale("sv");
   var t = new Date();
@@ -23,24 +24,39 @@ const StartWeatherInfo = ({
   const [searchOpen, setSearchOpen] = useState<boolean>(false);
 
   const handleSearch = () => {
-    setSearchOpen(!searchOpen)
-  }
+    setSearchOpen(!searchOpen);
+  };
 
   return (
     <div className="mt-8 text-white">
-    <div className="relative">
-        <SearchIcon sx={{ fontSize: 40, cursor: 'pointer' }} onClick={() => handleSearch()}/>
-        <SearchLocation searchOpen={searchOpen} setSearchOpen={setSearchOpen} setLat={setLat} setLon={setLon}/>
-    </div>
+      <div className="relative">
+        {searchOpen ? (
+          <CloseIcon
+            sx={{ fontSize: 40, cursor: "pointer" }}
+            onClick={() => handleSearch()}
+          />
+        ) : (
+          <SearchIcon
+            sx={{ fontSize: 40, cursor: "pointer" }}
+            onClick={() => handleSearch()}
+          />
+        )}
+        <SearchLocation
+          searchOpen={searchOpen}
+          setSearchOpen={setSearchOpen}
+          setLat={setLat}
+          setLon={setLon}
+        />
+      </div>
       <div className="flex justify-between items-center">
         <div className="flex items-center">
-        <div className="text-5xl">
-          {currentWeatherData.temp ? currentWeatherData.temp.toFixed(0) : ""}°
-        </div>
-        <img
-          src={`http://openweathermap.org/img/wn/${currentWeatherIcon}@2x.png`}
-          alt={currentWeatherIconDescription}
-        />
+          <div className="text-5xl">
+            {currentWeatherData.temp ? currentWeatherData.temp.toFixed(0) : ""}°
+          </div>
+          <img
+            src={`http://openweathermap.org/img/wn/${currentWeatherIcon}@2x.png`}
+            alt={currentWeatherIconDescription}
+          />
         </div>
       </div>
       <div className="flex items-center">
