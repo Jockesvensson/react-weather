@@ -3,7 +3,8 @@ body {
 }
 
 .app {
-  max-width: 1024px;
+    position: relative;
+  max-width: 1280px;
   padding: 0 2rem;
   margin: 0 auto;
 }
@@ -51,3 +52,10 @@ body {
         opacity: 1;
     }
 }
+
+// .oneweekweather-grid {
+//     @media (min-width: 61.885em) {
+//         display: grid;
+//         grid-template-columns: 13.866rem 2fr 2fr 1fr;
+//     }
+// }

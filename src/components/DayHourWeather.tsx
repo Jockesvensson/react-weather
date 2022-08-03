@@ -3,6 +3,7 @@ import OpacityIcon from "@mui/icons-material/Opacity";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import moment from "moment";
+import IconHelper from "./IconHelpers/IconHelper";
 
 const DayHourWeather = ({ forecastTwentyFourHoursData }) => {
   const slideLeft = () => {
@@ -27,27 +28,38 @@ const DayHourWeather = ({ forecastTwentyFourHoursData }) => {
         className="flex gap-8 overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative"
       >
         {forecastTwentyFourHoursData.map((item, index) => {
-          var t = new Date(item.dt * 1000);
+          var t = new Date(item.time);
           var measureDateSaying = moment(t, "hh:mm").format("HH:mm");
+          var icons = "";
+          if (!item.data.next_1_hours) {
+            icons = item.data.next_6_hours.summary.symbol_code;
+          } else {
+            icons = item.data.next_1_hours.summary.symbol_code;
+          }
           return (
             <div
               className="flex flex-col justify-center items-center text-white"
               key={index}
             >
-              <div>{measureDateSaying}</div>
-              {item.weather.map((item, index) => (
-                <img
-                  className="w-12 h-12"
-                  src={`http://openweathermap.org/img/wn/${item.icon}@2x.png`}
-                  alt="hej"
-                  key={index}
-                />
-              ))}
-              <div className="my-1 text-lg">{item.temp ? item.temp.toFixed(0) : ''}°</div>
-              {/* <div className="flex items-center text-xs">
-                <OpacityIcon sx={{ fontSize: 14, marginRight: '0.2rem' }} />
-                <div>{item.humidity} %</div>
-              </div> */}
+              <div className="mb-2">{measureDateSaying}</div>
+              <IconHelper icons={icons} />
+              <div className="my-1 text-lg">
+                {item.data.instant.details.air_temperature
+                  ? item.data.instant.details.air_temperature.toFixed(0)
+                  : ""}
+                °
+              </div>
+              <div className="flex items-center text-xs">
+                <OpacityIcon sx={{ fontSize: 14, marginRight: "0.2rem" }} />
+                <div>
+                  {item.data.next_1_hours.details.probability_of_precipitation
+                    ? item.data.next_1_hours.details.probability_of_precipitation.toFixed(
+                        0
+                      )
+                    : 0}{" "}
+                  %
+                </div>
+              </div>
             </div>
           );
         })}

@@ -10,9 +10,7 @@ const StartWeatherInfo = ({
   cityData,
   forecastCurrentDayMinTemp,
   forecastCurrentDayMaxTemp,
-  currentWeatherData,
-  currentWeatherIcon,
-  currentWeatherIconDescription,
+  currentWeatherTemp,
   setLat,
   setLon,
 }) => {
@@ -50,44 +48,25 @@ const StartWeatherInfo = ({
       </div>
       <div className="flex justify-between items-center">
         <div className="flex items-center">
-          <div className="text-5xl">
-            {currentWeatherData.temp ? currentWeatherData.temp.toFixed(0) : ""}°
-          </div>
-          <img
+          <div className="text-5xl">{currentWeatherTemp}°</div>
+          {/* <img
             src={`http://openweathermap.org/img/wn/${currentWeatherIcon}@2x.png`}
             alt={currentWeatherIconDescription}
-          />
+          /> */}
         </div>
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center mt-4">
         <div className="text-2xl">{cityData.name}</div>
         <div className="ml-1">
           <RoomIcon />
         </div>
       </div>
-      <div className="mt-8 flex">
-        <div>
-          {forecastCurrentDayMaxTemp
-            ? forecastCurrentDayMaxTemp.toFixed(0)
-            : ""}
-          ° /{" "}
-        </div>
-        <div className="mx-1">
-          {forecastCurrentDayMinTemp
-            ? forecastCurrentDayMinTemp.toFixed(0)
-            : ""}
-          °
-        </div>
-        <div>
-          {" "}
-          Känns som{" "}
-          {currentWeatherData.feels_like
-            ? currentWeatherData.feels_like.toFixed(0)
-            : ""}
-          °
-        </div>
+      <div className="mt-4 flex">
+        <div>{forecastCurrentDayMaxTemp}° / </div>
+        <div className="mx-1">{forecastCurrentDayMinTemp}°</div>
+        <div> Känns som {currentWeatherTemp}°</div>
       </div>
-      <div className="mb-12">
+      <div className="mb-12 capitalize">
         {day}, {time}
       </div>
     </div>

@@ -6,30 +6,40 @@ const ExtraWeatherInfo = ({
   forecastCurrentDayHumidity,
   forecastCurrentDayWindSpeed,
   forecastCurrentDayUVI,
+  currentWeatherData,
 }) => {
   const [UVIName, setUVIName] = useState<string>("");
 
   useEffect(() => {
-    if (forecastCurrentDayUVI > 11) {
+    if (currentWeatherData.ultraviolet_index_clear_sky > 11) {
       setUVIName("Extremt");
     }
 
-    if (forecastCurrentDayUVI < 11 && forecastCurrentDayUVI > 8) {
+    if (
+      currentWeatherData.ultraviolet_index_clear_sky < 11 &&
+      currentWeatherData.ultraviolet_index_clear_sky > 8
+    ) {
       setUVIName("Väldigt högt");
     }
 
-    if (forecastCurrentDayUVI < 8 && forecastCurrentDayUVI > 6) {
+    if (
+      currentWeatherData.ultraviolet_index_clear_sky < 8 &&
+      currentWeatherData.ultraviolet_index_clear_sky > 6
+    ) {
       setUVIName("Högt");
     }
 
-    if (forecastCurrentDayUVI < 6 && forecastCurrentDayUVI > 3) {
+    if (
+      currentWeatherData.ultraviolet_index_clear_sky < 6 &&
+      currentWeatherData.ultraviolet_index_clear_sky > 3
+    ) {
       setUVIName("Måttligt");
     }
 
-    if (forecastCurrentDayUVI < 3) {
+    if (currentWeatherData.ultraviolet_index_clear_sky < 3) {
       setUVIName("Lågt");
     }
-  }, [forecastCurrentDayUVI]);
+  }, [currentWeatherData.ultraviolet_index_clear_sky]);
 
   return (
     <div className="flex w-full mt-4 mb-12 py-4 bg-sky-300 border-sky-200 border-2 rounded-3xl text-white">
@@ -46,10 +56,10 @@ const ExtraWeatherInfo = ({
         </div>
         <div className="mt-2">Vind</div>
         <div>
-          {forecastCurrentDayWindSpeed
-            ? (forecastCurrentDayWindSpeed * 3.6).toFixed(0)
-            : null}{" "}
-          km/h
+          {currentWeatherData.wind_speed
+            ? currentWeatherData.wind_speed.toFixed(0)
+            : 0}{" "}
+          m/s
         </div>
       </div>
       <div className="flex flex-col items-center justify-center w-1/3">
@@ -57,7 +67,12 @@ const ExtraWeatherInfo = ({
           <OpacityIcon sx={{ color: "blue", fontSize: 40 }} />
         </div>
         <div className="mt-2">Luftfukt.</div>
-        <div>{forecastCurrentDayHumidity} %</div>
+        <div>
+          {currentWeatherData.relative_humidity
+            ? currentWeatherData.relative_humidity.toFixed(0)
+            : 0}{" "}
+          %
+        </div>
       </div>
     </div>
   );

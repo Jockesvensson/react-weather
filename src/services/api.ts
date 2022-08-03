@@ -1,3 +1,6 @@
+import moment from "moment";
+import "moment/locale/sv";
+
 const { REACT_APP_API_KEY } = process.env;
 
 const getCityData = (setCityData, lat, lon) => {
@@ -5,69 +8,113 @@ const getCityData = (setCityData, lat, lon) => {
     fetch(url)
         .then((res) => res.json())
         .then((json) => {
-            // console.log(json.city);
             setCityData(json.city);
         })
 }
-
-const getCurrentWeatherData = (setCurrentWeatherData, setCurrentWeatherIcon, setCurrentWeatherIconDescription, lat, lon) => {
-    const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,daily,alerts&appid=${REACT_APP_API_KEY}&units=metric`
-    fetch(url)
-        .then((res) => res.json())
-        .then((json) => {
-            // console.log("logg i backlog: ", json.current);
-            setCurrentWeatherData(json.current);
-            setCurrentWeatherIcon(json.current.weather[0].icon)
-            setCurrentWeatherIconDescription(json.current.weather[0].description)
-        })
-}
-
-const getForecastDailyData = (setForecastCurrentDayData, setForecastCurrentDayMaxTemp, setForecastCurrentDaySunrise, 
-    setForecastCurrentDaySunset, setForecastCurrentDayHumidity, setForecastCurrentDayWindSpeed, setForecastCurrentDayUVI, lat, lon) => {
-    const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,current,alerts&appid=${REACT_APP_API_KEY}&units=metric`
-    fetch(url)
-        .then((res) => res.json())
-        .then((json) => {
-            // console.log("logg i backlog: ", json.daily);
-            setForecastCurrentDayData(json.daily[0].temp.min);
-            setForecastCurrentDayMaxTemp(json.daily[0].temp.max);
-            setForecastCurrentDaySunrise(json.daily[0].sunrise);
-            setForecastCurrentDaySunset(json.daily[0].sunset);
-            setForecastCurrentDayHumidity(json.daily[0].humidity);
-            setForecastCurrentDayWindSpeed(json.daily[0].wind_speed);
-            setForecastCurrentDayUVI(json.daily[0].uvi);
-        })
-}
-
-const getForecastTwentyFourHoursData = (setForecastTwentyFourHoursData, lat, lon) => {
-    const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,Daily,current,alerts&appid=${REACT_APP_API_KEY}&units=metric`
-    fetch(url)
-        .then((res) => res.json())
-        .then((json) => {
-            console.log("logg i backlog: ", json.hourly.slice(0, 24));
-            setForecastTwentyFourHoursData(json.hourly.slice(0, 24));
-        })
-}
-
-const getForecastWeekData = (setForecastWeekData, lat, lon) => {
-    const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,current,alerts&appid=${REACT_APP_API_KEY}&units=metric`
-    fetch(url)
-        .then((res) => res.json())
-        .then((json) => {
-            // console.log("logg i backlog: ", json.daily);
-            setForecastWeekData(json.daily);
-        })
-}
-
 const getGeolocationData = (setLat, setLon, search) => {
     const url = `https://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=1&appid=${REACT_APP_API_KEY}`
     fetch(url)
         .then((res) => res.json())
         .then((json) => {
-            // console.log("logg i backlog: ", json[0]);
             setLat(json[0].lat);
             setLon(json[0].lon);
         })
 }
 
-export { getCityData, getCurrentWeatherData, getForecastDailyData, getForecastTwentyFourHoursData, getForecastWeekData, getGeolocationData }
+const getYrTwentyFourHoursData = (lat, lon, setForecastTwentyFourHoursData) => {
+    const url = `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${lat}&lon=${lon}`
+    fetch(url)
+        .then((res) => res.json())
+        .then((json) => {
+            setForecastTwentyFourHoursData(json.properties.timeseries.slice(1, 25));
+        })
+}
+
+const getYrCurrentWeatherData = (lat, lon, setCurrentWeatherTemp, setForecastCurrentDayMinTemp, setForecastCurrentDayMaxTemp, setCurrentWeatherData) => {
+    const url = `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${lat}&lon=${lon}`
+    fetch(url)
+        .then((res) => res.json())
+        .then((json) => {
+            setCurrentWeatherTemp(json.properties.timeseries[0].data.instant.details.air_temperature.toFixed(0));
+            setForecastCurrentDayMinTemp(json.properties.timeseries[0].data.instant.details.air_temperature_percentile_10.toFixed(0))
+            setForecastCurrentDayMaxTemp(json.properties.timeseries[0].data.instant.details.air_temperature_percentile_90.toFixed(0))
+            setCurrentWeatherData(json.properties.timeseries[0].data.instant.details);
+        })
+}
+
+const getYrWeekWeatherData = (lat, lon, setForecastWeekData) => {
+    const url = `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${lat}&lon=${lon}`
+    fetch(url)
+        .then((res) => res.json())
+        .then((json) => {
+            setForecastWeekData(json.properties.timeseries);
+        })
+}
+
+const getYrTomorrowWeatherData = (lat, lon, setTomorrowWeatherData) => {
+    const url = `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${lat}&lon=${lon}`
+    fetch(url)
+        .then((res) => res.json())
+        .then((json) => {
+            moment.locale("sv");
+            var today = moment().format("L");
+            var tomorrow = moment().add(1, "days").format("L");
+            const tomorrowFirstTwoValuesData = json.properties.timeseries.filter((item) =>
+            item.time.includes(today)
+            );
+            const tomorrowRemainingValuesData = json.properties.timeseries.filter((item) =>
+            item.time.includes(tomorrow)
+            );
+            setTomorrowWeatherData([...tomorrowFirstTwoValuesData.slice(-2), ...tomorrowRemainingValuesData.slice(0, 22)])
+        })
+}
+
+const getYrTwoDaysForwardWeatherData = (lat, lon, setTwoDaysForwardWeatherData) => {
+    const url = `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${lat}&lon=${lon}`
+    fetch(url)
+        .then((res) => res.json())
+        .then((json) => {
+            moment.locale("sv");
+            var tomorrow = moment().add(1, "days").format("L");
+            var twoDaysForward = moment().add(2, "days").format("L");
+            const twoDaysForwardFirstTwoValuesData = json.properties.timeseries.filter((item) =>
+            item.time.includes(tomorrow)
+            );
+            const twoDaysForwardRemainingValuesData = json.properties.timeseries.filter((item) =>
+            item.time.includes(twoDaysForward)
+            );
+            setTwoDaysForwardWeatherData([...twoDaysForwardFirstTwoValuesData.slice(-2), ...twoDaysForwardRemainingValuesData.slice(0, 22)])
+        })
+}
+
+const getYrCurrentSunriseSunsetData = (lat, lon, setTodaySunriseData, setTodaySunsetData, sunTodayDate) => {
+    const url = `https://api.met.no/weatherapi/sunrise/2.0/.json?lat=${lat}&lon=${lon}&date=${sunTodayDate}&offset=02:00`
+    fetch(url)
+        .then((res) => res.json())
+        .then((json) => {
+            setTodaySunriseData(json.location.time[0].sunrise.time);
+            setTodaySunsetData(json.location.time[0].sunset.time);
+        })
+}
+
+const getYrSunriseSunsetData = (lat, lon, setSunriseData, setSunsetData, sunDate) => {
+    const url = `https://api.met.no/weatherapi/sunrise/2.0/.json?lat=${lat}&lon=${lon}&date=${sunDate}&offset=02:00`
+    fetch(url)
+        .then((res) => res.json())
+        .then((json) => {
+            setSunriseData(json.location.time[0].sunrise.time);
+            setSunsetData(json.location.time[0].sunset.time);
+        })
+}
+
+export { 
+    getCityData,
+    getGeolocationData, 
+    getYrTwentyFourHoursData, 
+    getYrCurrentWeatherData, 
+    getYrWeekWeatherData, 
+    getYrTomorrowWeatherData, 
+    getYrTwoDaysForwardWeatherData,
+    getYrCurrentSunriseSunsetData,
+    getYrSunriseSunsetData
+}

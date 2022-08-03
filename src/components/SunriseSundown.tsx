@@ -1,13 +1,10 @@
 import React from "react";
 import moment from "moment";
 
-const SunriseSundown = ({
-  forecastCurrentDaySunrise,
-  forecastCurrentDaySunset,
-}) => {
-  var t = new Date(forecastCurrentDaySunrise * 1000);
+const SunriseSundown = ({ todaySunriseData, todaySunsetData }) => {
+  var t = new Date(todaySunriseData);
   var sunrise = moment(t, "hh:mm").format("HH:mm");
-  var tt = new Date(forecastCurrentDaySunset * 1000);
+  var tt = new Date(todaySunsetData);
   var sunset = moment(tt, "hh:mm").format("HH:mm");
 
   return (
