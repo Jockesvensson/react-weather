@@ -6,6 +6,7 @@ import IconHelperNight from "../IconHelpers/IconHelperNight";
 import IconHelperMorning from "../IconHelpers/IconHelperMorning";
 import IconHelperEvening from "../IconHelpers/IconHelperEvening";
 import { iconFunction } from "../../helper/iconFunction";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const Today = ({
   forecastWeekData,
@@ -80,27 +81,47 @@ const Today = ({
 
   return (
     <div
-      className="flex items-center py-4 px-2 xsm:px-4 bg-sky-300 hover:bg-sky-600 border-sky-200 border-b-2 text-white cursor-pointer"
+      className="weather-item-container bg-sky-300 hover:bg-sky-600 border-sky-200 border-b-2 text-white cursor-pointer"
       onClick={() => handleWeatherInformation(todaysWeather)}
     >
-      <div className="w-2/9 capitalize">
+      <div className="weather-item-date capitalize">
         {dayName} {date}. {month}
       </div>
-      <IconHelperNight nightIcon={nightIcon} />
-      <IconHelperMorning morningIcon={morningIcon} />
-      <IconHelperAfternoon afternoonIcon={afternoonIcon} />
-      <IconHelperEvening eveningIcon={eveningIcon} />
-      <div className="w-1/9 mx-2">
-        {todaysWeatherMaxTemp}°<span className="mx-1">/</span>
-        {todaysWeatherMinTemp}°
+      <div className="weather-item-icons">
+        <div className="weather-item-symbol-0">
+          <IconHelperNight nightIcon={nightIcon} />
+        </div>
+        <div className="weather-item-symbol-1">
+          <IconHelperMorning morningIcon={morningIcon} />
+        </div>
+        <div className="weather-item-symbol-2">
+          <IconHelperAfternoon afternoonIcon={afternoonIcon} />
+        </div>
+        <div className="weather-item-symbol-3">
+          <IconHelperEvening eveningIcon={eveningIcon} />
+        </div>
       </div>
-      {todaysSumRain <= 0 ? (
-        <div className="w-1/9 mx-2"></div>
-      ) : (
-        <div className="w-1/9 mx-2">{todaysSumRain} mm</div>
-      )}
-      <div className="w-1/9 mx-2">{maxWindSpeed} m/s</div>
-      <div className="w-1/9 text-sm">Se tid för tid</div>
+      <div className="weather-item-forecast">
+        <div className="">
+          {todaysWeatherMaxTemp}°<span className="mx-1">/</span>
+          {todaysWeatherMinTemp}°
+        </div>
+        {todaysSumRain <= 0 ? (
+          <div className=""></div>
+        ) : (
+          <div className="">{todaysSumRain} mm</div>
+        )}
+        <div className="">{maxWindSpeed} m/s</div>
+      </div>
+      <div className="hidden lg:flex items-center justify-end text-sm">
+        <div>Se tid för tid</div>
+        <span className="ml-2">
+          <ArrowForwardIosIcon sx={{ fontSize: 23 }} />
+        </span>
+      </div>
+      <div className="weather-item-readmore text-sm">
+        <ArrowForwardIosIcon />
+      </div>
     </div>
   );
 };

@@ -35,13 +35,11 @@ const SingleOneWeekWeatherShorter = ({
     setSunDate(newDate);
   }, [currentWeatherInformationShorter, setSunDate]);
 
-  //   console.log(currentWeatherInformationShorter);
-
   return (
     <div className="z-30 fixed top-0 bottom-0 left-0 right-0">
       <div className="absolute top-0 bottom-0 left-0 right-0 overflow-scroll">
         <div className="flex flex-col justify-center items-center relative min-h-full">
-          <div className="mx-auto w-5/6 h-auto relative px-24 py-16 bg-green-200">
+          <div className="mx-auto w-5/6 h-auto relative px-20 py-16 bg-green-200">
             <>
               <div
                 className="absolute top-2 right-2"

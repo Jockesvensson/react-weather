@@ -14,13 +14,14 @@ import Sunthunderrain from "../../assets/sunthunderrain.svg";
 import Heavyrainandthunder from "../../assets/heavyrainandthunder.svg";
 import Moonrain from "../../assets/moonrain.svg";
 import Sunrain from "../../assets/sunrain.svg";
+import Rainandthunder from "../../assets/rainandthunder.svg";
 
 const IconHelperMorning = ({ morningIcon }) => {
   return (
     <>
       {morningIcon ? (
-        <div className="w-1/9 mx-2">
-          {morningIcon === "" && <div className="w-1/9 mx-2"></div>}
+        <div className="">
+          {morningIcon === "" && <div className=""></div>}
           {morningIcon === "clearsky_day" && (
             <img className="w-10 h-10" src={Sun} alt="hej" />
           )}
@@ -51,6 +52,9 @@ const IconHelperMorning = ({ morningIcon }) => {
           {morningIcon === "lightrain" && (
             <img className="w-10 h-10" src={Smallrain} alt="hej" />
           )}
+          {morningIcon === "rainandthunder" && (
+            <img className="w-10 h-10" src={Rainandthunder} alt="hej" />
+          )}
           {morningIcon === "fog" && (
             <img className="w-10 h-10" src={Fog} alt="hej" />
           )}
@@ -68,7 +72,7 @@ const IconHelperMorning = ({ morningIcon }) => {
           )}
         </div>
       ) : (
-        <div className="w-1/9 mx-2"></div>
+        <div className=""></div>
       )}
     </>
   );

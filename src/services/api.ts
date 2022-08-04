@@ -48,6 +48,7 @@ const getYrWeekWeatherData = (lat, lon, setForecastWeekData) => {
         .then((res) => res.json())
         .then((json) => {
             setForecastWeekData(json.properties.timeseries);
+            console.log("complete week data", json.properties.timeseries);
         })
 }
 
@@ -84,6 +85,7 @@ const getYrTwoDaysForwardWeatherData = (lat, lon, setTwoDaysForwardWeatherData) 
             item.time.includes(twoDaysForward)
             );
             setTwoDaysForwardWeatherData([...twoDaysForwardFirstTwoValuesData.slice(-2), ...twoDaysForwardRemainingValuesData.slice(0, 22)])
+            console.log("two days from now data", twoDaysForwardRemainingValuesData.slice(0, 22));
         })
 }
 
