@@ -58,6 +58,7 @@ const OneWeekWeather = ({
         <div className="oneweekweather-container-mobile text-sm border-sky-200 border-b-2">
           <div className="oneweekweather-item-mobile">
             <div className="oneweekweather-item-night">Natt</div>
+            <div className="oneweekweather-item-day">Dag</div>
             <div className="oneweekweather-item-morning">Morgon</div>
             <div className="oneweekweather-item-afternoon">Efterm.</div>
             <div className="oneweekweather-item-evening">Kväll</div>

@@ -78,6 +78,7 @@ const SixDays = ({
     setCurrentDateInformation(date);
     setCurrentMonthInformation(month);
     setShowMoreInformationShorter(true);
+    document.body.style.overflow = 'hidden';
   };
 
   return (

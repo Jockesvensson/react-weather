@@ -28,51 +28,51 @@ const IconHelperShorter = ({ icons }) => {
       {icon ? (
         <div className="w-1/6">
           {icon === "clearsky_day" && (
-            <img className="w-10 h-10" src={Sun} alt="hej" />
+            <img className="w-8 h-8 small:w-10 small:h-10" src={Sun} alt="hej" />
           )}
           {icon === "partlycloudy_night" && (
-            <img className="w-10 h-10" src={Mooncloud} alt="hej" />
+            <img className="w-8 h-8 small:w-10 small:h-10" src={Mooncloud} alt="hej" />
           )}
           {icon === "clearsky_night" && (
-            <img className="w-10 h-10" src={Halfmoon} alt="hej" />
+            <img className="w-8 h-8 small:w-10 small:h-10" src={Halfmoon} alt="hej" />
           )}
           {icon === "partlycloudy_day" && (
-            <img className="w-10 h-10" src={Smallsuncloud} alt="hej" />
+            <img className="w-8 h-8 small:w-10 small:h-10" src={Smallsuncloud} alt="hej" />
           )}
           {icon === "fair_day" && (
-            <img className="w-10 h-10" src={Bigsuncloud} alt="hej" />
+            <img className="w-8 h-8 small:w-10 small:h-10" src={Bigsuncloud} alt="hej" />
           )}
           {icon === "cloudy" && (
-            <img className="w-10 h-10" src={Lightcloud} alt="hej" />
+            <img className="w-8 h-8 small:w-10 small:h-10" src={Lightcloud} alt="hej" />
           )}
           {icon === "fair_night" && (
-            <img className="w-10 h-10" src={Bigmooncloud} alt="hej" />
+            <img className="w-8 h-8 small:w-10 small:h-10" src={Bigmooncloud} alt="hej" />
           )}
           {icon === "heavyrain" && (
-            <img className="w-10 h-10" src={Rain} alt="hej" />
+            <img className="w-8 h-8 small:w-10 small:h-10" src={Rain} alt="hej" />
           )}
           {icon === "rain" && (
-            <img className="w-10 h-10" src={Littlerain} alt="hej" />
+            <img className="w-8 h-8 small:w-10 small:h-10" src={Littlerain} alt="hej" />
           )}
           {icon === "lightrain" && (
-            <img className="w-10 h-10" src={Smallrain} alt="hej" />
+            <img className="w-8 h-8 small:w-10 small:h-10" src={Smallrain} alt="hej" />
           )}
           {icon === "rainandthunder" && (
-            <img className="w-10 h-10" src={Rainandthunder} alt="hej" />
+            <img className="w-8 h-8 small:w-10 small:h-10" src={Rainandthunder} alt="hej" />
           )}
           {icon === "heavyrainandthunder" && (
-            <img className="w-10 h-10" src={Heavyrainandthunder} alt="hej" />
+            <img className="w-8 h-8 small:w-10 small:h-10" src={Heavyrainandthunder} alt="hej" />
           )}
           {icon === "heavyrainshowersandthunder_day" && (
-            <img className="w-10 h-10" src={Sunthunderrain} alt="hej" />
+            <img className="w-8 h-8 small:w-10 small:h-10" src={Sunthunderrain} alt="hej" />
           )}
           {icon === "rainshowers_night" && (
-            <img className="w-10 h-10" src={Moonrain} alt="hej" />
+            <img className="w-8 h-8 small:w-10 small:h-10" src={Moonrain} alt="hej" />
           )}
           {icon === "lightrainshowers_day" && (
-            <img className="w-10 h-10" src={Sunrain} alt="hej" />
+            <img className="w-8 h-8 small:w-10 small:h-10" src={Sunrain} alt="hej" />
           )}
-          {icon === "fog" && <img className="w-10 h-10" src={Fog} alt="hej" />}
+          {icon === "fog" && <img className="w-8 h-8 small:w-10 small:h-10" src={Fog} alt="hej" />}
         </div>
       ) : (
         <div className="w-1/6"></div>

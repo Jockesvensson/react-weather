@@ -70,13 +70,13 @@ const TwoDays = ({
     var afternoonIcon = twoDaysWeather
       .slice(14, 15)
       .map((item) => item.data.next_6_hours.summary.symbol_code);
-    var eveningIcon = twoDaysWeather
-      .slice(-1)
-      .map((item) => item.data.next_6_hours.summary.symbol_code);
+    // var eveningIcon = twoDaysWeather
+    //   .slice(-1)
+    //   .map((item) => item.data.next_6_hours.summary.symbol_code);
     setNightIcon(nightIcon[0]);
     setMorningIcon(morningIcon[0]);
     setAfternoonIcon(afternoonIcon[0]);
-    setEveningIcon(eveningIcon[0]);
+    // setEveningIcon(eveningIcon[0]);
   }, [twoDaysWeather]);
 
   const handleWeatherInformation = (twoDaysWeather) => {
@@ -85,6 +85,7 @@ const TwoDays = ({
     setCurrentDateInformation(date);
     setCurrentMonthInformation(month);
     setShowMoreInformation(true);
+    document.body.style.overflow = 'hidden';
   };
 
   return (

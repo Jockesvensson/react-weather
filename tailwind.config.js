@@ -8,6 +8,9 @@ module.exports = {
       'xsm': '450px',
       // => @media (min-width: 450px) { ... }
 
+      'xsmall': '475px',
+      // => @media (min-width: 450px) { ... }
+
       'small': '550px',
       // => @media (min-width: 550px) { ... }
 

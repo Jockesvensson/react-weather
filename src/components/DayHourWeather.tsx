@@ -16,7 +16,7 @@ const DayHourWeather = ({ forecastTwentyFourHoursData }) => {
   };
 
   return (
-    <div className="relative grid grid-cols-1 py-4 px-8 bg-sky-300 border-sky-200 border-2 rounded-3xl group">
+    <div className="relative grid grid-cols-1 py-4 px-4 bg-sky-300 border-sky-200 border-2 rounded-3xl group">
       <div
         className="bg-white top-1/2 left-1 -translate-y-1/2 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden xsm:group-hover:block"
         onClick={() => slideLeft()}
@@ -25,7 +25,7 @@ const DayHourWeather = ({ forecastTwentyFourHoursData }) => {
       </div>
       <div
         id="slider"
-        className="flex gap-8 overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative"
+        className="flex gap-2 small:gap-8 overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative"
       >
         {forecastTwentyFourHoursData.map((item, index) => {
           var t = new Date(item.time);
@@ -41,9 +41,9 @@ const DayHourWeather = ({ forecastTwentyFourHoursData }) => {
               className="flex flex-col justify-center items-center text-white"
               key={index}
             >
-              <div className="mb-2">{measureDateSaying}</div>
+              <div className="mb-2 text-sm small:text-base">{measureDateSaying}</div>
               <IconHelper icons={icons} />
-              <div className="my-1 text-lg">
+              <div className="my-1 text-base small:text-lg">
                 {item.data.instant.details.air_temperature
                   ? item.data.instant.details.air_temperature.toFixed(0)
                   : ""}

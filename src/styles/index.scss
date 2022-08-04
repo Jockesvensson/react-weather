@@ -70,21 +70,44 @@ body {
 
 .oneweekweather-item-mobile {
     display: grid;
+    grid-template-areas: "night day evening";
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-area: symbol-header;
+
+    @media (min-width: 550px) { 
     grid-template-areas: "night morning afternoon evening";
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-area: symbol-header;
+    }
 
     .oneweekweather-item-night {
         grid-area: night;
         justify-self: center;
     }
     .oneweekweather-item-morning {
-        grid-area: morning;
-        justify-self: center;
+        display: none;        
+
+        @media (min-width: 550px) { 
+            display: block;
+            grid-area: morning;
+            justify-self: center;
+        }
     }
     .oneweekweather-item-afternoon {
-        grid-area: afternoon;
+        display: none;        
+
+        @media (min-width: 550px) { 
+            display: block;
+            grid-area: afternoon;
+            justify-self: center;
+        }
+    }
+    .oneweekweather-item-day {
+        grid-area: day;
         justify-self: center;
+
+        @media (min-width: 550px) { 
+            display: none;
+        }
     }
     .oneweekweather-item-evening {
         grid-area: evening;
@@ -178,7 +201,7 @@ body {
 
     @media (min-width: 1024px) { 
         grid-template-columns: 2fr;
-        grid-template-rows: 2.13rem;
+        grid-template-rows: 1.7rem;
         grid-template-areas: "date";
     }
 }
@@ -235,5 +258,133 @@ body {
 
     @media (min-width: 1024px) { 
         display: none;
+    }
+}
+
+.singleoneweek-title-container {
+    // display: none;
+    
+    // @media (min-width: 1024px) { 
+    //     display: grid;
+    //     grid-template-columns: 0.5fr 0.5fr 2fr 1fr; 
+    //     grid-template-areas: "time weather forecast windDesc";
+    //     padding: 0rem 0.5rem 0.5rem;
+    // }
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr 2fr; 
+    grid-template-areas: "time weather forecast";
+    padding: 0rem 0.5rem 0.5rem;
+
+    @media (min-width: 475px) { 
+        grid-template-columns: 0.5fr 0.5fr 2fr 1fr; 
+        grid-template-areas: "time weather forecast windDesc";
+    }
+}
+
+.singleoneweek-title-forecast {
+    display: grid;
+    grid-template-columns: 0.75fr 1fr 1fr;
+    grid-template-areas: "temp rain wind";
+    grid-area: forecast;
+    align-self: center;
+
+    .singleoneweek-title-temp {
+        grid-area: temp;
+        justify-self: baseline;
+
+        @media (min-width: 475px) {
+            justify-self: baseline;
+        }
+    }
+    .singleoneweek-title-rain {
+        grid-area: rain;
+        justify-self: baseline;
+
+        @media (min-width: 475px) {
+            justify-self: baseline;
+        }
+    }
+    .singleoneweek-title-wind {
+        grid-area: wind;
+        justify-self: baseline;
+
+        @media (min-width: 475px) {
+            justify-self: baseline;
+        }
+    }
+}
+
+.singleoneweek-item-container {
+    display: grid;
+    grid-template-rows: 1.25rem;
+    grid-template-columns: 0.5fr 0.5fr 2fr; 
+    grid-template-areas: "time weather forecast";
+    row-gap: 0.2rem;
+    padding: 0.75rem 0.5rem 1rem;
+
+    @media (min-width: 475px) { 
+        grid-template-columns: 0.5fr 0.5fr 2fr 1fr; 
+        grid-template-areas: "time weather forecast windDesc";
+    }
+}
+
+.singleoneweek-item-time {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-area: time;
+    align-self: center;
+    margin-top: 0.5rem;
+}
+.singleoneweek-item-weather {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-area: weather;
+    align-self: center;
+    margin-top: 0.5rem;
+
+}
+.singleoneweek-item-forecast {
+    display: grid;
+    grid-template-columns: 0.75fr 1fr 1fr;
+    grid-template-areas: "temp rain wind";
+    grid-area: forecast;
+    align-self: center;
+    margin-top: 0.5rem;
+
+    .singleoneweek-item-temp {
+        grid-area: temp;
+        justify-self: baseline;
+
+        @media (min-width: 475px) {
+            justify-self: baseline;
+        }
+    }
+    .singleoneweek-item-rain {
+        grid-area: rain;
+        justify-self: baseline;
+
+        @media (min-width: 475px) {
+            justify-self: baseline;
+        }
+    }
+    .singleoneweek-item-wind {
+        grid-area: wind;
+        justify-self: baseline;
+
+        @media (min-width: 475px) {
+            justify-self: baseline;
+        }
+    }
+
+}
+.singleoneweek-item-windDesc {
+    display: none;
+
+    @media (min-width: 475px) { 
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-area: windDesc;
+        align-self: center;
+        margin-top: 0.5rem;
     }
 }

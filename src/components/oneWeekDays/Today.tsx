@@ -77,6 +77,7 @@ const Today = ({
     setCurrentDateInformation(date);
     setCurrentMonthInformation(month);
     setShowMoreInformation(true);
+    document.body.style.overflow = 'hidden';
   };
 
   return (
