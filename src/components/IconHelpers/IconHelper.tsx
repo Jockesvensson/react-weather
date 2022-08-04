@@ -15,6 +15,7 @@ import Heavyrainandthunder from "../../assets/heavyrainandthunder.svg";
 import Sunthunderrain from "../../assets/sunthunderrain.svg";
 import Moonrain from "../../assets/moonrain.svg";
 import Sunrain from "../../assets/sunrain.svg";
+import Lightrainandthunder from "../../assets/lightrainandthunder.svg";
 
 export const IconHelper = ({ icons }) => {
   const [icon, setIcon] = useState<any>([]);
@@ -35,6 +36,9 @@ export const IconHelper = ({ icons }) => {
           )}
           {icon === "clearsky_night" && (
             <img className="w-8 h-8 small:w-10 small:h-10" src={Halfmoon} alt="hej" />
+          )}
+          {icon === "lightrainandthunder" && (
+            <img className="w-8 h-8 small:w-10 small:h-10" src={Lightrainandthunder} alt="hej" />
           )}
           {icon === "partlycloudy_day" && (
             <img className="w-8 h-8 small:w-10 small:h-10" src={Smallsuncloud} alt="hej" />
@@ -117,6 +121,9 @@ export const IconHelper = ({ icons }) => {
           )}
           {icon === "rainshowers_night" && (
             <img className="w-8 h-8 small:w-10 small:h-10" src={Moonrain} alt="hej" />
+          )}
+          {icon === "lightrainandthunder" && (
+            <img className="w-8 h-8 small:w-10 small:h-10" src={Lightrainandthunder} alt="hej" />
           )}
           {icon === "lightrainshowers_day" && (
             <img className="w-8 h-8 small:w-10 small:h-10" src={Sunrain} alt="hej" />

@@ -35,8 +35,6 @@ const SingleOneWeekWeather = ({
     setSunDate(newDate);
   }, [currentWeatherInformation, setSunDate]);
 
-  console.log(currentWeatherInformation);
-
   return (
     <div className="z-30 fixed top-0 bottom-0 left-0 right-0">
       <div className="absolute top-0 bottom-0 left-0 right-0 small:py-4 overflow-y-scroll">

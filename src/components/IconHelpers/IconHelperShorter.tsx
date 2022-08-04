@@ -15,6 +15,7 @@ import Heavyrainandthunder from "../../assets/heavyrainandthunder.svg";
 import Sunthunderrain from "../../assets/sunthunderrain.svg";
 import Moonrain from "../../assets/moonrain.svg";
 import Sunrain from "../../assets/sunrain.svg";
+import Lightrainandthunder from "../../assets/lightrainandthunder.svg";
 
 const IconHelperShorter = ({ icons }) => {
   const [icon, setIcon] = useState<any>([]);
@@ -41,6 +42,9 @@ const IconHelperShorter = ({ icons }) => {
           )}
           {icon === "fair_day" && (
             <img className="w-8 h-8 small:w-10 small:h-10" src={Bigsuncloud} alt="hej" />
+          )}
+          {icon === "lightrainandthunder" && (
+            <img className="w-8 h-8 small:w-10 small:h-10" src={Lightrainandthunder} alt="hej" />
           )}
           {icon === "cloudy" && (
             <img className="w-8 h-8 small:w-10 small:h-10" src={Lightcloud} alt="hej" />

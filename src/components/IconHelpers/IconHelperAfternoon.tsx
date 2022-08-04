@@ -15,6 +15,7 @@ import Heavyrainandthunder from "../../assets/heavyrainandthunder.svg";
 import Moonrain from "../../assets/moonrain.svg";
 import Sunrain from "../../assets/sunrain.svg";
 import Rainandthunder from "../../assets/rainandthunder.svg";
+import Lightrainandthunder from "../../assets/lightrainandthunder.svg";
 
 const IconHelperAfternoon = ({ afternoonIcon }) => {
   return (
@@ -33,6 +34,9 @@ const IconHelperAfternoon = ({ afternoonIcon }) => {
           )}
           {afternoonIcon === "partlycloudy_day" && (
             <img className="w-10 h-10" src={Smallsuncloud} alt="hej" />
+          )}
+          {afternoonIcon === "lightrainandthunder" && (
+            <img className="w-8 h-8 small:w-10 small:h-10" src={Lightrainandthunder} alt="hej" />
           )}
           {afternoonIcon === "fair_day" && (
             <img className="w-10 h-10" src={Bigsuncloud} alt="hej" />
