@@ -25,7 +25,7 @@ const DayHourWeather = ({ forecastTwentyFourHoursData }) => {
       </div>
       <div
         id="slider"
-        className="flex gap-2 small:gap-8 overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative"
+        className="flex gap-3 small:gap-8 overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative"
       >
         {forecastTwentyFourHoursData.map((item, index) => {
           var t = new Date(item.time);
