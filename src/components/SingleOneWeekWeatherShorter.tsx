@@ -21,7 +21,6 @@ const SingleOneWeekWeatherShorter = ({
   const handleClose = () => {
     setShowMoreInformationShorter(false);
     document.body.style.overflow = "unset";
-    document.body.style.paddingRight = '0rem';
   };
 
   var t = new Date(sunriseData);
@@ -38,7 +37,7 @@ const SingleOneWeekWeatherShorter = ({
 
   return (
     <div className="z-30 fixed top-0 bottom-0 left-0 right-0">
-      <div className="absolute top-0 bottom-0 left-0 right-0 small:py-4 overflow-y-scroll">
+      <div className="absolute top-0 bottom-0 left-0 right-0 small:py-4">
         <div className="flex flex-col justify-center items-center relative min-h-full">
           <div className="mx-auto w-full sm:w-11/12 lg:max-w-7xl h-auto relative px-4 small:px-12 lg:px-20 pt-6 pb-10 small:pt-6 small:pb-6 bg-white small:rounded-3xl">
             <>
