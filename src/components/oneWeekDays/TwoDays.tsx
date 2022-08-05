@@ -50,7 +50,7 @@ const TwoDays = ({
     const getSumTwoDaysRainLastItem = twoDaysWeather
       .slice(-1)
       .map(
-        (item, index) => item.data.next_6_hours.details.precipitation_amount
+        (item, index) => item.data.next_6_hours ? item.data.next_6_hours.details.precipitation_amount : item.data.next_1_hours.details.precipitation_amount
       );
     const totalRain = [...getSumTwoDaysRain, ...getSumTwoDaysRainLastItem];
     setTwoDaysSumRain(totalRain.reduce((a, b) => a + b, 0).toFixed(1));
