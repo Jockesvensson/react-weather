@@ -10,7 +10,7 @@ export const iconFunction = (todaysWeather, setNightIcon, setMorningIcon, setAft
       item.time.includes(time + "T12:00:00Z")
     );
     const afternoon = todaysWeather.filter((item) =>
-      item.time.includes(time + "T18:00:00Z")
+      item.time.includes(time + "T16:00:00Z")
     );
     const evening = todaysWeather.filter((item) =>
       item.time.includes(time + "T21:00:00Z")
