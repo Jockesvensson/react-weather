@@ -26,6 +26,7 @@ const SingleOneWeekWeather = ({
   const handleClose = () => {
     setShowMoreInformation(false);
     document.body.style.overflow = "unset";
+    document.body.style.paddingRight = '0rem';
   };
 
   useEffect(() => {

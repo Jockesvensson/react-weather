@@ -42,18 +42,18 @@ const TwoDays = ({
     );
     setTwoDaysWeatherMaxTemp(Math.max(...getHighAndLowTempTwoDays));
     setTwoDaysWeatherMinTemp(Math.min(...getHighAndLowTempTwoDays));
-    // const getSumTwoDaysRain = twoDaysWeather
-    //   .slice(0, -1)
-    //   .map(
-    //     (item, index) => item.data.next_1_hours.details.precipitation_amount
-    //   );
-    // const getSumTwoDaysRainLastItem = twoDaysWeather
-    //   .slice(-1)
-    //   .map(
-    //     (item, index) => item.data.next_6_hours.details.precipitation_amount
-    //   );
-    // const totalRain = [...getSumTwoDaysRain, ...getSumTwoDaysRainLastItem];
-    // setTwoDaysSumRain(totalRain.reduce((a, b) => a + b, 0).toFixed(1));
+    const getSumTwoDaysRain = twoDaysWeather
+      .slice(0, -1)
+      .map(
+        (item, index) => item.data.next_1_hours.details.precipitation_amount
+      );
+    const getSumTwoDaysRainLastItem = twoDaysWeather
+      .slice(-1)
+      .map(
+        (item, index) => item.data.next_6_hours.details.precipitation_amount
+      );
+    const totalRain = [...getSumTwoDaysRain, ...getSumTwoDaysRainLastItem];
+    setTwoDaysSumRain(totalRain.reduce((a, b) => a + b, 0).toFixed(1));
     const getWindspeed = twoDaysWeather.map((item, index) =>
       item.data.instant.details.wind_speed.toFixed(0)
     );
@@ -63,20 +63,36 @@ const TwoDays = ({
   useEffect(() => {
     var nightIcon = twoDaysWeather
       .slice(0, 1)
-      .map((item) => item.data.next_6_hours.summary.symbol_code);
+      .map((item) =>
+        item.data.next_6_hours !== undefined
+          ? item.data.next_6_hours.summary.symbol_code
+          : item.data.next_1_hours.summary.symbol_code
+      );
     var morningIcon = twoDaysWeather
       .slice(6, 7)
-      .map((item) => item.data.next_6_hours.summary.symbol_code);
+      .map((item) =>
+        item.data.next_6_hours !== undefined
+          ? item.data.next_6_hours.summary.symbol_code
+          : item.data.next_1_hours.summary.symbol_code
+      );
     var afternoonIcon = twoDaysWeather
       .slice(14, 15)
-      .map((item) => item.data.next_6_hours.summary.symbol_code);
-    // var eveningIcon = twoDaysWeather
-    //   .slice(-1)
-    //   .map((item) => item.data.next_6_hours.summary.symbol_code);
+      .map((item) =>
+        item.data.next_6_hours !== undefined
+          ? item.data.next_6_hours.summary.symbol_code
+          : item.data.next_1_hours.summary.symbol_code
+      );
+    var eveningIcon = twoDaysWeather
+      .slice(-1)
+      .map((item) =>
+        item.data.next_6_hours !== undefined
+          ? item.data.next_6_hours.summary.symbol_code
+          : item.data.next_1_hours.summary.symbol_code
+      );
     setNightIcon(nightIcon[0]);
     setMorningIcon(morningIcon[0]);
     setAfternoonIcon(afternoonIcon[0]);
-    // setEveningIcon(eveningIcon[0]);
+    setEveningIcon(eveningIcon[0]);
   }, [twoDaysWeather]);
 
   const handleWeatherInformation = (twoDaysWeather) => {
@@ -85,7 +101,8 @@ const TwoDays = ({
     setCurrentDateInformation(date);
     setCurrentMonthInformation(month);
     setShowMoreInformation(true);
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
+    document.body.style.paddingRight = "1.15rem";
   };
 
   return (

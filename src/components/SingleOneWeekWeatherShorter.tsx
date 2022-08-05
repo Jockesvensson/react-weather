@@ -21,6 +21,7 @@ const SingleOneWeekWeatherShorter = ({
   const handleClose = () => {
     setShowMoreInformationShorter(false);
     document.body.style.overflow = "unset";
+    document.body.style.paddingRight = '0rem';
   };
 
   var t = new Date(sunriseData);

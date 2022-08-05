@@ -11,8 +11,6 @@ import SixDays from "./oneWeekDays/SixDays";
 import SevenDays from "./oneWeekDays/SevenDays";
 import EightDays from "./oneWeekDays/EightDays";
 import SingleOneWeekWeatherShorter from "./SingleOneWeekWeatherShorter";
-import { categoryTitle } from "../services/categoryTitle";
-import { categoryTitleMobile } from "../services/categoryTitleMobile";
 
 const OneWeekWeather = ({
   forecastWeekData,
@@ -66,6 +64,7 @@ const OneWeekWeather = ({
         </div>
         <Today
           forecastWeekData={forecastWeekData}
+          tomorrowWeatherData={tomorrowWeatherData}
           setCurrentWeatherInformation={setCurrentWeatherInformation}
           setShowMoreInformation={setShowMoreInformation}
           setCurrentDayInformation={setCurrentDayInformation}

@@ -27,7 +27,7 @@ const StartWeatherInfo = ({
 
   return (
     <div className="mt-8 text-white">
-      <div className="relative">
+      <div className="relative mb-4">
         {searchOpen ? (
           <CloseIcon
             sx={{ fontSize: 40, cursor: "pointer" }}
