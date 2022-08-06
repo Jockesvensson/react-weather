@@ -71,8 +71,6 @@ const Today = ({
     );
   }, [todaysWeather]);
 
-  console.log(todaysWeather);
-
   const handleWeatherInformation = (todaysWeather) => {
     setCurrentWeatherInformation(todaysWeather.slice(1));
     setCurrentDayInformation(dayName);
