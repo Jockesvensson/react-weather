@@ -39,7 +39,7 @@ const SingleOneWeekWeatherShorter = ({
     <div className="z-30 fixed top-0 bottom-0 left-0 right-0">
       <div className="absolute top-0 bottom-0 left-0 right-0 small:py-4">
         <div className="flex flex-col justify-center items-center relative min-h-full">
-          <div className="mx-auto w-full sm:w-11/12 lg:max-w-7xl h-auto relative px-4 small:px-12 lg:px-20 pt-6 pb-10 small:pt-6 small:pb-6 bg-white small:rounded-3xl">
+          <div className="mx-auto w-full sm:w-11/12 lg:max-w-7xl h-auto relative px-4 small:px-12 lg:px-20 pt-6 pb-10 small:pt-6 small:pb-6 bg-white">
             <>
               <div
                 className="absolute top-6 right-4 small:right-12 lg:right-20"
@@ -79,7 +79,9 @@ const SingleOneWeekWeatherShorter = ({
                 if (measureDateSaying === "20") {
                   endTime = "02";
                 }
-                var icons = item.data.next_6_hours.summary.symbol_code;
+                var icons = item.data.next_6_hours
+                  ? item.data.next_6_hours.summary.symbol_code
+                  : "";
                 var windDirection =
                   item.data.instant.details.wind_from_direction;
                 var windSpeed = item.data.instant.details.wind_speed.toFixed(0);
@@ -109,33 +111,35 @@ const SingleOneWeekWeatherShorter = ({
                           : null}
                         °
                       </div>
-                      {(item.data.next_6_hours &&
+                      {item.data.next_6_hours ? (
+                        (item.data.next_6_hours &&
+                          item.data.next_6_hours.details
+                            .precipitation_amount_min > 0) ||
                         item.data.next_6_hours.details
-                          .precipitation_amount_min > 0) ||
-                      item.data.next_6_hours.details.precipitation_amount_max >
-                        0 ? (
-                        <div className="singleoneweek-item-rain flex text-blue-600">
-                          <div>
-                            {item.data.next_6_hours.details
-                              .precipitation_amount_min
-                              ? item.data.next_6_hours.details.precipitation_amount_min.toFixed(
-                                  1
-                                )
-                              : 0}
+                          .precipitation_amount_max > 0 ? (
+                          <div className="singleoneweek-item-rain flex text-blue-600">
+                            <div>
+                              {item.data.next_6_hours.details
+                                .precipitation_amount_min
+                                ? item.data.next_6_hours.details.precipitation_amount_min.toFixed(
+                                    1
+                                  )
+                                : 0}
+                            </div>
+                            <span className="mx-1">-</span>
+                            <div>
+                              {item.data.next_6_hours.details
+                                .precipitation_amount_max
+                                ? item.data.next_6_hours.details.precipitation_amount_max.toFixed(
+                                    1
+                                  )
+                                : 0}
+                            </div>
                           </div>
-                          <span className="mx-1">-</span>
-                          <div>
-                            {item.data.next_6_hours.details
-                              .precipitation_amount_max
-                              ? item.data.next_6_hours.details.precipitation_amount_max.toFixed(
-                                  1
-                                )
-                              : 0}
-                          </div>
-                        </div>
-                      ) : (
-                        <div className=""></div>
-                      )}
+                        ) : (
+                          <div className=""></div>
+                        )
+                      ) : null}
                       <div className="singleoneweek-item-wind flex">
                         <div>
                           {item.data.instant.details.wind_speed

@@ -31,6 +31,7 @@ const ThreeDays = ({
   const [morningIcon, setMorningIcon] = useState<string>("");
   const [afternoonIcon, setAfternoonIcon] = useState<string>("");
   const [eveningIcon, setEveningIcon] = useState<string>("");
+  const [customClass, setCustomClass] = useState<string>("");
 
   useEffect(() => {
     moment.locale("sv");
@@ -84,12 +85,25 @@ const ThreeDays = ({
     setCurrentDateInformation(date);
     setCurrentMonthInformation(month);
     setShowMoreInformationShorter(true);
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
   };
+
+  const timeNow = moment().format("HH:mm");
+
+  useEffect(() => {
+    if (timeNow > "08:00") {
+      document.body.style.backgroundColor = "rgb(13, 165, 206)";
+      setCustomClass("container-bg-day-item");
+    }
+    if (timeNow > "22:00" || timeNow < "08:00") {
+      document.body.style.backgroundColor = "rgb(54, 50, 50)";
+      setCustomClass("container-bg-night-item");
+    }
+  }, [timeNow]);
 
   return (
     <div
-      className="weather-item-container bg-sky-300 hover:bg-sky-600 border-sky-200 border-b-2 text-white cursor-pointer"
+      className={`weather-item-container border-b-2 text-white cursor-pointer ${customClass}`}
       onClick={() => handleWeatherInformation(threeDaysWeather)}
     >
       <div className="weather-item-date capitalize">
@@ -110,14 +124,14 @@ const ThreeDays = ({
         </div>
       </div>
       <div className="weather-item-forecast">
-        <div className="">
-          {threeDaysWeatherMaxTemp}°<span className="mx-1">/</span>
+        <div className="text-red-500 text-lg">
+          {threeDaysWeatherMaxTemp}°<span className="mx-1 text-black">/</span>
           {threeDaysWeatherMinTemp}°
         </div>
         {threeDaysSumRain <= 0 ? (
           <div className=""></div>
         ) : (
-          <div className="">{threeDaysSumRain} mm</div>
+          <div className="text-blue-600">{threeDaysSumRain} mm</div>
         )}
         <div className="">{maxWindSpeed} m/s</div>
       </div>

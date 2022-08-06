@@ -41,6 +41,11 @@ const Startpage = () => {
   const [sunTodayDate, setSunTodayDate] = useState<string>(
     moment().format("L")
   );
+  const [currentWeatherIcon, setCurrentWeatherIcon] = useState<string>('');
+  const [currentWeatherWindSpeed, setCurrentWeatherWindSpeed] = useState<string>('');
+  const [currentWeatherGust, setCurrentWeatherGust] = useState<string>('');
+  const [currentWeatherRain, setCurrentWeatherRain] = useState<string>('');
+  const [currentWindDirection, setCurrentWindDirection] = useState<string>('');
   const [sunDate, setSunDate] = useState<string>(moment().format("L"));
 
   const [tomorrowWeatherData, setTomorrowWeatherData] = useState<any>([]);
@@ -59,7 +64,12 @@ const Startpage = () => {
       setCurrentWeatherTemp,
       setForecastCurrentDayMinTemp,
       setForecastCurrentDayMaxTemp,
-      setCurrentWeatherData
+      setCurrentWeatherData,
+      setCurrentWeatherIcon,
+      setCurrentWeatherWindSpeed,
+      setCurrentWeatherGust,
+      setCurrentWeatherRain,
+      setCurrentWindDirection
     );
     getYrWeekWeatherData(lat, lon, setForecastWeekData);
     getYrTomorrowWeatherData(lat, lon, setTomorrowWeatherData);
@@ -83,6 +93,11 @@ const Startpage = () => {
         currentWeatherTemp={currentWeatherTemp}
         setLat={setLat}
         setLon={setLon}
+        currentWeatherIcon={currentWeatherIcon}
+        currentWeatherWindSpeed={currentWeatherWindSpeed}
+        currentWeatherGust={currentWeatherGust}
+        currentWeatherRain={currentWeatherRain}
+        currentWindDirection={currentWindDirection}
       />
       <DayHourWeather
         forecastTwentyFourHoursData={forecastTwentyFourHoursData}

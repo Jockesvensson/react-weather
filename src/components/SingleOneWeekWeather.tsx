@@ -29,7 +29,7 @@ const SingleOneWeekWeather = ({
   };
 
   useEffect(() => {
-    const date = currentWeatherInformation[1].time;
+    const date = currentWeatherInformation[0].time;
     var t = new Date(date);
     var newDate = moment(t, "YYYY-MM-DD").format("YYYY-MM-DD");
     setSunDate(newDate);
@@ -39,7 +39,7 @@ const SingleOneWeekWeather = ({
     <div className="z-30 fixed top-0 bottom-0 left-0 right-0">
       <div className="absolute top-0 bottom-0 left-0 right-0 small:py-4">
         <div className="flex flex-col justify-center items-center relative min-h-full">
-          <div className="mx-auto max-h-screen overflow-y-auto w-full sm:w-11/12 lg:max-w-6xl h-auto relative px-4 small:px-12 lg:px-20 pt-6 pb-10 small:pt-6 small:pb-6 bg-white small:rounded-3xl">
+          <div className="mx-auto max-h-screen overflow-y-auto w-full sm:w-11/12 lg:max-w-6xl h-auto relative px-4 small:px-12 lg:px-20 pt-6 pb-10 small:pt-6 small:pb-6 bg-white">
             <>
               <div
                 className="absolute top-6 right-4 small:right-12 lg:right-20"

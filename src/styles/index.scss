@@ -1,12 +1,38 @@
 body {
-  background-color: rgb(13, 165, 206);
+    background-color: rgb(13, 165, 206);
 }
 
 .app {
     position: relative;
-  max-width: 1140px;
-  padding: 0 1rem;
-  margin: 0 auto;
+    max-width: 1140px;
+    padding: 0 1rem;
+    margin: 0 auto;
+}
+
+.container-bg-day {
+    background-color: rgb(125, 211, 252);
+    border-color: rgb(186, 230, 253);
+}
+
+.container-bg-day-item {
+    background-color: rgb(125, 211, 252);
+    border-color: rgb(186, 230, 253);
+
+    &:hover {
+        background-color: rgb(160, 223, 252);
+    }
+}
+
+.container-bg-night {
+    background-color: rgb(138, 149, 156);
+}
+
+.container-bg-night-item {
+    background-color: rgb(138, 149, 156);
+
+    &:hover {
+        background-color: rgb(160, 168, 173);
+    }
 }
 
 .search {

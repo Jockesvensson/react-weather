@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "moment/locale/sv";
+import moment from "moment";
 import SingleOneWeekWeather from "./SingleOneWeekWeather";
 import Today from "./oneWeekDays/Today";
 import Tomorrow from "./oneWeekDays/Tomorrow";
@@ -36,11 +37,27 @@ const OneWeekWeather = ({
     useState<string>("");
   const [currentMonthInformation, setCurrentMonthInformation] =
     useState<string>("");
+  const [customClass, setCustomClass] = useState<string>("");
+
+  const timeNow = moment().format("HH:mm");
+
+  useEffect(() => {
+    if (timeNow > '08:00') {
+      document.body.style.backgroundColor = "rgb(13, 165, 206)";
+      setCustomClass('container-bg-day')
+    }
+    if (timeNow > "22:00" || timeNow < "06:00") {
+      document.body.style.backgroundColor = "rgb(54, 50, 50)";
+      setCustomClass("container-bg-night");
+    }
+  }, [timeNow]);
 
   return (
     <>
-      <div className="flex flex-col mt-4 py-4 px-2 sm:px-4 bg-sky-300 border-sky-200 border-2 rounded-3xl text-white">
-        <div className="oneweekweather-container-desktop text-sm border-sky-200 border-b-2">
+      <div
+        className={`flex flex-col mt-4 py-4 px-2 sm:px-4 border-2 rounded-3xl text-white ${customClass}`}
+      >
+        <div className="oneweekweather-container-desktop text-sm border-b-2">
           <div className="oneweekweather-item-symbols-headers">
             <div className="oneweekweather-item-night">Natt</div>
             <div className="oneweekweather-item-morning">Morgon</div>
@@ -53,7 +70,7 @@ const OneWeekWeather = ({
             <div className="oneweekweather-item-wind">Vind</div>
           </div>
         </div>
-        <div className="oneweekweather-container-mobile text-sm border-sky-200 border-b-2">
+        <div className="oneweekweather-container-mobile text-sm  border-b-2">
           <div className="oneweekweather-item-mobile">
             <div className="oneweekweather-item-night">Natt</div>
             <div className="oneweekweather-item-day">Dag</div>
@@ -64,7 +81,6 @@ const OneWeekWeather = ({
         </div>
         <Today
           forecastWeekData={forecastWeekData}
-          tomorrowWeatherData={tomorrowWeatherData}
           setCurrentWeatherInformation={setCurrentWeatherInformation}
           setShowMoreInformation={setShowMoreInformation}
           setCurrentDayInformation={setCurrentDayInformation}

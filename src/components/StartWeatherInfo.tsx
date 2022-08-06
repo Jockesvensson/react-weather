@@ -5,6 +5,8 @@ import moment from "moment";
 import "moment/locale/sv";
 import SearchLocation from "./SearchLocation";
 import CloseIcon from "@mui/icons-material/Close";
+import IconHelperStartWeatherInfo from "./IconHelpers/IconHelperStartWeatherInfo";
+import SouthIcon from "@mui/icons-material/South";
 
 const StartWeatherInfo = ({
   cityData,
@@ -13,6 +15,11 @@ const StartWeatherInfo = ({
   currentWeatherTemp,
   setLat,
   setLon,
+  currentWeatherIcon,
+  currentWeatherWindSpeed,
+  currentWeatherGust,
+  currentWeatherRain,
+  currentWindDirection
 }) => {
   moment.locale("sv");
   var t = new Date();
@@ -26,7 +33,7 @@ const StartWeatherInfo = ({
   };
 
   return (
-    <div className="mt-8 text-white">
+    <div className="mt-8 px-4 text-white">
       <div className="relative mb-4">
         {searchOpen ? (
           <CloseIcon
@@ -46,14 +53,9 @@ const StartWeatherInfo = ({
           setLon={setLon}
         />
       </div>
-      <div className="flex justify-between items-center">
-        <div className="flex items-center">
-          <div className="text-5xl">{currentWeatherTemp}°</div>
-          {/* <img
-            src={`http://openweathermap.org/img/wn/${currentWeatherIcon}@2x.png`}
-            alt={currentWeatherIconDescription}
-          /> */}
-        </div>
+      <div className="flex justify-between lg:justify-start items-center">
+        <div className="text-5xl lg:mr-2">{currentWeatherTemp}°</div>
+        <IconHelperStartWeatherInfo icons={currentWeatherIcon} />
       </div>
       <div className="flex items-center mt-4">
         <div className="text-2xl">{cityData.name}</div>
@@ -61,13 +63,26 @@ const StartWeatherInfo = ({
           <RoomIcon />
         </div>
       </div>
-      <div className="mt-4 flex">
-        <div>{forecastCurrentDayMaxTemp}° / </div>
-        <div className="mx-1">{forecastCurrentDayMinTemp}°</div>
-        <div> Känns som {currentWeatherTemp}°</div>
-      </div>
-      <div className="mb-12 capitalize">
+      <div className=" capitalize text-xl">
         {day}, {time}
+      </div>
+      <div className="mt-4 flex items-end text-red-500">
+        <div className="mr-2 text-3xl ">{forecastCurrentDayMaxTemp}°</div>
+        <div> <span className="text-white">Känns som</span> <span className="">{currentWeatherTemp}</span>°</div>
+      </div>
+      <div className="flex items-end text-blue-600">
+        <div className="mr-2 text-3xl">{currentWeatherRain} </div>
+        <span>mm</span>
+      </div>
+      <div className="flex items-end mb-10">
+        <div className="mr-1 text-3xl">{currentWeatherWindSpeed}</div>
+        <div>({currentWeatherGust}) m/s</div>
+        <div
+            className="ml-1 self-end"
+            style={{ transform: `rotate(${currentWindDirection}deg)` }}
+          >
+            <SouthIcon fontSize="small" />
+          </div>
       </div>
     </div>
   );

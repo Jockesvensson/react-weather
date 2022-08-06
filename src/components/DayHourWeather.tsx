@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import OpacityIcon from "@mui/icons-material/Opacity";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
@@ -6,6 +6,8 @@ import moment from "moment";
 import IconHelper from "./IconHelpers/IconHelper";
 
 const DayHourWeather = ({ forecastTwentyFourHoursData }) => {
+  const [customClass, setCustomClass] = useState<string>("");
+
   const slideLeft = () => {
     const slider = document.getElementById("slider");
     slider!.scrollLeft = slider!.scrollLeft - 300;
@@ -15,8 +17,23 @@ const DayHourWeather = ({ forecastTwentyFourHoursData }) => {
     slider!.scrollLeft = slider!.scrollLeft + 300;
   };
 
+  const timeNow = moment().format("HH:mm");
+
+  useEffect(() => {
+    if (timeNow > "08:00") {
+      document.body.style.backgroundColor = "rgb(13, 165, 206)";
+      setCustomClass("container-bg-day");
+    }
+    if (timeNow > "22:00") {
+      document.body.style.backgroundColor = "rgb(54, 50, 50)";
+      setCustomClass("container-bg-night");
+    }
+  }, [timeNow]);
+
   return (
-    <div className="relative grid grid-cols-1 py-4 px-4 bg-sky-300 border-sky-200 border-2 rounded-3xl group">
+    <div
+      className={`relative grid grid-cols-1 py-4 px-4 ${customClass} border-2 rounded-3xl group`}
+    >
       <div
         className="bg-white top-1/2 left-1 -translate-y-1/2 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden xsm:group-hover:block"
         onClick={() => slideLeft()}
@@ -41,7 +58,9 @@ const DayHourWeather = ({ forecastTwentyFourHoursData }) => {
               className="flex flex-col justify-center items-center text-white"
               key={index}
             >
-              <div className="mb-2 text-sm small:text-base">{measureDateSaying}</div>
+              <div className="mb-2 text-sm small:text-base">
+                {measureDateSaying}
+              </div>
               <IconHelper icons={icons} />
               <div className="my-1 text-base small:text-lg">
                 {item.data.instant.details.air_temperature
