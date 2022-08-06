@@ -120,14 +120,14 @@ const FourDays = ({
         </div>
       </div>
       <div className="weather-item-forecast">
-        <div className="text-red-500 text-lg">
-          {fourDaysWeatherMaxTemp}°<span className="mx-1 text-black">/</span>
+        <div className="text-lg">
+          {fourDaysWeatherMaxTemp}°<span className="mx-1">/</span>
           {fourDaysWeatherMinTemp}°
         </div>
         {fourDaysSumRain <= 0 ? (
           <div className=""></div>
         ) : (
-          <div className="text-blue-600">{fourDaysSumRain} mm</div>
+          <div className="">{fourDaysSumRain} mm</div>
         )}
         <div className="">{maxWindSpeed} m/s</div>
       </div>

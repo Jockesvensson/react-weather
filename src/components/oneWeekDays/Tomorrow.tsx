@@ -120,14 +120,14 @@ const Tomorrow = ({
         </div>
       </div>
       <div className="weather-item-forecast">
-        <div className="text-red-500 text-lg">
-          {tomorrowWeatherMaxTemp}°<span className="mx-1 text-black">/</span>
+        <div className=" text-lg">
+          {tomorrowWeatherMaxTemp}°<span className="mx-1 ">/</span>
           {tomorrowWeatherMinTemp}°
         </div>
         {tomorrowSumRain <= 0 ? (
           <div className=""></div>
         ) : (
-          <div className="text-blue-600">{tomorrowSumRain} mm</div>
+          <div className="">{tomorrowSumRain} mm</div>
         )}
         <div className="">{maxWindSpeed} m/s</div>
       </div>

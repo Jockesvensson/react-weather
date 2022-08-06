@@ -124,14 +124,14 @@ const SevenDays = ({
         </div>
       </div>
       <div className="weather-item-forecast">
-        <div className="text-red-500 text-lg">
-          {sevenDaysWeatherMaxTemp}°<span className="mx-1 text-black">/</span>
+        <div className="text-lg">
+          {sevenDaysWeatherMaxTemp}°<span className="mx-1">/</span>
           {sevenDaysWeatherMinTemp}°
         </div>
         {sevenDaysSumRain <= 0 ? (
           <div className=""></div>
         ) : (
-          <div className="text-blue-600">{sevenDaysSumRain} mm</div>
+          <div className="">{sevenDaysSumRain} mm</div>
         )}
         <div className="">{maxWindSpeed} m/s</div>
       </div>

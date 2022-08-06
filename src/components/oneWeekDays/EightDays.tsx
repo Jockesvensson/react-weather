@@ -124,14 +124,14 @@ const EightDays = ({
         </div>
       </div>
       <div className="weather-item-forecast">
-        <div className="text-red-500 text-lg">
-          {eightDaysWeatherMaxTemp}°<span className="mx-1 text-black">/</span>
+        <div className="text-lg">
+          {eightDaysWeatherMaxTemp}°<span className="mx-1">/</span>
           {eightDaysWeatherMinTemp}°
         </div>
         {eightDaysSumRain <= 0 ? (
           <div className=""></div>
         ) : (
-          <div className="text-blue-600">{eightDaysSumRain} mm</div>
+          <div className="">{eightDaysSumRain} mm</div>
         )}
         <div className="">{maxWindSpeed} m/s</div>
       </div>

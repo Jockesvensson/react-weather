@@ -118,14 +118,14 @@ const SixDays = ({
         </div>
       </div>
       <div className="weather-item-forecast">
-        <div className="text-red-500 text-lg">
-          {sixDaysWeatherMaxTemp}°<span className="mx-1 text-black">/</span>
+        <div className="text-lg">
+          {sixDaysWeatherMaxTemp}°<span className="mx-1">/</span>
           {sixDaysWeatherMinTemp}°
         </div>
         {sixDaysSumRain <= 0 ? (
           <div className=""></div>
         ) : (
-          <div className="text-blue-600">{sixDaysSumRain} mm</div>
+          <div className="">{sixDaysSumRain} mm</div>
         )}
         <div className="">{maxWindSpeed} m/s</div>
       </div>

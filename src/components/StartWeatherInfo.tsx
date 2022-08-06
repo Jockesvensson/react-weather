@@ -66,11 +66,11 @@ const StartWeatherInfo = ({
       <div className=" capitalize text-xl">
         {day}, {time}
       </div>
-      <div className="mt-4 flex items-end text-red-500">
+      <div className="mt-4 flex items-end ">
         <div className="mr-2 text-3xl ">{forecastCurrentDayMaxTemp}°</div>
         <div> <span className="text-white">Känns som</span> <span className="">{currentWeatherTemp}</span>°</div>
       </div>
-      <div className="flex items-end text-blue-600">
+      <div className="flex items-end ">
         <div className="mr-2 text-3xl">{currentWeatherRain} </div>
         <span>mm</span>
       </div>
