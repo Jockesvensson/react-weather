@@ -55,12 +55,14 @@ const EightDays = ({
     );
     setMaxWindSpeed(Math.max(...getWindspeed));
     const getSumEightDaysRain = eightDaysWeather.map(
-      (item, index) => item.data.next_6_hours.details.precipitation_amount
+      (item, index) => item.data.next_6 ? item.data.next_6_hours.details.precipitation_amount : 0
     );
     setEightDaysSumRain(
       getSumEightDaysRain.reduce((a, b) => a + b, 0).toFixed(1)
     );
   }, [eightDaysWeather]);
+
+  console.log(eightDaysWeather)
 
   useEffect(() => {
     var icons = eightDaysWeather.map(
