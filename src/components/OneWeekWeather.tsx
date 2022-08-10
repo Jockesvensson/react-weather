@@ -12,6 +12,7 @@ import SixDays from "./oneWeekDays/SixDays";
 import SevenDays from "./oneWeekDays/SevenDays";
 import EightDays from "./oneWeekDays/EightDays";
 import SingleOneWeekWeatherShorter from "./SingleOneWeekWeatherShorter";
+import { customCssContainerFunction } from "../helper/customCssFunctions";
 
 const OneWeekWeather = ({
   forecastWeekData,
@@ -42,14 +43,7 @@ const OneWeekWeather = ({
   const timeNow = moment().format("HH:mm");
 
   useEffect(() => {
-    if (timeNow > '08:00') {
-      document.body.style.backgroundColor = "rgb(13, 165, 206)";
-      setCustomClass('container-bg-day')
-    }
-    if (timeNow > "22:00" || timeNow < "06:00") {
-      document.body.style.backgroundColor = "rgb(54, 50, 50)";
-      setCustomClass("container-bg-night");
-    }
+    customCssContainerFunction(timeNow, setCustomClass);
   }, [timeNow]);
 
   return (

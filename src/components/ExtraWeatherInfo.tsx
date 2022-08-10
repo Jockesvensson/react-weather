@@ -2,58 +2,20 @@ import React, { useEffect, useState } from "react";
 import AirIcon from "@mui/icons-material/Air";
 import OpacityIcon from "@mui/icons-material/Opacity";
 import moment from "moment";
+import { ultravioletFunction } from "../helper/ultravioletFunction";
+import { customCssFunction } from "../helper/customCssFunctions";
 
-const ExtraWeatherInfo = ({
-  forecastCurrentDayHumidity,
-  forecastCurrentDayWindSpeed,
-  forecastCurrentDayUVI,
-  currentWeatherData,
-}) => {
+const ExtraWeatherInfo = ({ currentWeatherWindSpeed, currentWeatherUVI, currentWeatherHumidity }) => {
   const [UVIName, setUVIName] = useState<string>("");
   const [customClass, setCustomClass] = useState<string>("");
-
-  useEffect(() => {
-    if (currentWeatherData.ultraviolet_index_clear_sky > 11) {
-      setUVIName("Extremt");
-    }
-
-    if (
-      currentWeatherData.ultraviolet_index_clear_sky < 11 &&
-      currentWeatherData.ultraviolet_index_clear_sky > 8
-    ) {
-      setUVIName("Väldigt högt");
-    }
-
-    if (
-      currentWeatherData.ultraviolet_index_clear_sky < 8 &&
-      currentWeatherData.ultraviolet_index_clear_sky > 6
-    ) {
-      setUVIName("Högt");
-    }
-
-    if (
-      currentWeatherData.ultraviolet_index_clear_sky < 6 &&
-      currentWeatherData.ultraviolet_index_clear_sky > 3
-    ) {
-      setUVIName("Måttligt");
-    }
-
-    if (currentWeatherData.ultraviolet_index_clear_sky < 3) {
-      setUVIName("Lågt");
-    }
-  }, [currentWeatherData.ultraviolet_index_clear_sky]);
-
   const timeNow = moment().format("HH:mm");
 
   useEffect(() => {
-    if (timeNow > '08:00') {
-      document.body.style.backgroundColor = "rgb(13, 165, 206)";
-      setCustomClass('container-bg-day')
-    }
-    if (timeNow > "22:00") {
-      document.body.style.backgroundColor = "rgb(54, 50, 50)";
-      setCustomClass("container-bg-night");
-    }
+    ultravioletFunction(currentWeatherUVI, setUVIName);
+  }, [currentWeatherUVI]);
+
+  useEffect(() => {
+    customCssFunction(timeNow, setCustomClass);
   }, [timeNow]);
 
   return (
@@ -73,8 +35,8 @@ const ExtraWeatherInfo = ({
         </div>
         <div className="mt-2">Vind</div>
         <div>
-          {currentWeatherData.wind_speed
-            ? currentWeatherData.wind_speed.toFixed(0)
+          {currentWeatherWindSpeed
+            ? currentWeatherWindSpeed
             : 0}{" "}
           m/s
         </div>
@@ -85,8 +47,8 @@ const ExtraWeatherInfo = ({
         </div>
         <div className="mt-2">Luftfukt.</div>
         <div>
-          {currentWeatherData.relative_humidity
-            ? currentWeatherData.relative_humidity.toFixed(0)
+          {currentWeatherHumidity
+            ? currentWeatherHumidity
             : 0}{" "}
           %
         </div>

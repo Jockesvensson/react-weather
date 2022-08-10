@@ -4,9 +4,11 @@ import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import moment from "moment";
 import IconHelper from "./IconHelpers/IconHelper";
+import { customCssFunction } from "../helper/customCssFunctions";
 
 const DayHourWeather = ({ forecastTwentyFourHoursData }) => {
   const [customClass, setCustomClass] = useState<string>("");
+  const timeNow = moment().format("HH:mm");
 
   const slideLeft = () => {
     const slider = document.getElementById("slider");
@@ -17,17 +19,8 @@ const DayHourWeather = ({ forecastTwentyFourHoursData }) => {
     slider!.scrollLeft = slider!.scrollLeft + 300;
   };
 
-  const timeNow = moment().format("HH:mm");
-
   useEffect(() => {
-    if (timeNow > "08:00") {
-      document.body.style.backgroundColor = "rgb(13, 165, 206)";
-      setCustomClass("container-bg-day");
-    }
-    if (timeNow > "22:00") {
-      document.body.style.backgroundColor = "rgb(54, 50, 50)";
-      setCustomClass("container-bg-night");
-    }
+    customCssFunction(timeNow, setCustomClass);
   }, [timeNow]);
 
   return (

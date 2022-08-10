@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import "moment/locale/sv";
-import IconHelperNight from "../IconHelpers/IconHelperNight";
-import IconHelperMorning from "../IconHelpers/IconHelperMorning";
-import IconHelperAfternoon from "../IconHelpers/IconHelperAfternoon";
-import IconHelperEvening from "../IconHelpers/IconHelperEvening";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { iconsFunctionShorter } from "../../helper/iconFunctions";
+import OneDayItem from "./OneDayItem";
+import { weatherDetailsFunction } from "../../helper/weatherDetailsFunctions";
+import { dayDateFunction } from "../../helper/timeFunctions";
+import { customCssFunction } from "../../helper/customCssFunctions";
 
 const ThreeDays = ({
   forecastWeekData,
@@ -15,15 +15,12 @@ const ThreeDays = ({
   setCurrentDateInformation,
   setCurrentMonthInformation,
 }) => {
-  const [threeDaysWeather, setThreeDaysWeather] = useState<any>([]);
-  const [threeDaysWeatherMaxTemp, setThreeDaysWeatherMaxTemp] = useState<any>(
-    []
-  );
-  const [threeDaysWeatherMinTemp, setThreeDaysWeatherMinTemp] = useState<any>(
-    []
-  );
-  const [threeDaysSumRain, setThreeDaysSumRain] = useState<any>([]);
+  const [weather, setWeather] = useState<any>([]);
+  const [weatherMaxTemp, setWeatherMaxTemp] = useState<number>(0);
+  const [weatherMinTemp, setWeatherMinTemp] = useState<number>(0);
+  const [sumRain, setSumRain] = useState<any>([]);
   const [maxWindSpeed, setMaxWindSpeed] = useState<any>([]);
+  const [day, setDay] = useState<number>(3);
   const [dayName, setDayName] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [month, setMonth] = useState<string>("");
@@ -32,55 +29,39 @@ const ThreeDays = ({
   const [afternoonIcon, setAfternoonIcon] = useState<string>("");
   const [eveningIcon, setEveningIcon] = useState<string>("");
   const [customClass, setCustomClass] = useState<string>("");
+  const timeNow = moment().format("HH:mm");
 
   useEffect(() => {
-    moment.locale("sv");
-    setDayName(moment().add(3, "days").format("dddd"));
-    setDate(moment().add(3, "days").format("D"));
-    setMonth(moment().add(3, "days").format("MMM "));
-    const threeDaysData = forecastWeekData.filter((item) =>
-      item.time.includes(threeDays)
+    dayDateFunction(
+      day,
+      setDayName,
+      setDate,
+      setMonth,
+      forecastWeekData,
+      setWeather
     );
-    setThreeDaysWeather(threeDaysData);
-  }, [forecastWeekData]);
+    customCssFunction(timeNow, setCustomClass);
+  }, [forecastWeekData, day, timeNow]);
 
   useEffect(() => {
-    const getHighAndLowTempThreeDays = threeDaysWeather.map((item, index) =>
-      item.data.instant.details.air_temperature.toFixed(0)
+    weatherDetailsFunction(
+      weather,
+      setWeatherMaxTemp,
+      setWeatherMinTemp,
+      setMaxWindSpeed,
+      setSumRain
     );
-    setThreeDaysWeatherMaxTemp(Math.max(...getHighAndLowTempThreeDays));
-    setThreeDaysWeatherMinTemp(Math.min(...getHighAndLowTempThreeDays));
-    const getSumThreeDaysRain = threeDaysWeather.map(
-      (item, index) => item.data.next_6_hours.details.precipitation_amount
+    iconsFunctionShorter(
+      weather,
+      setNightIcon,
+      setMorningIcon,
+      setAfternoonIcon,
+      setEveningIcon
     );
-    setThreeDaysSumRain(
-      getSumThreeDaysRain.reduce((a, b) => a + b, 0).toFixed(1)
-    );
-    const getWindspeed = threeDaysWeather.map((item, index) =>
-      item.data.instant.details.wind_speed.toFixed(0)
-    );
-    setMaxWindSpeed(Math.max(...getWindspeed));
-  }, [threeDaysWeather]);
+  }, [weather]);
 
-  useEffect(() => {
-    var icons = threeDaysWeather.map(
-      (item, index) => item.data.next_6_hours.summary.symbol_code
-    );
-    var nightIcon = icons[0];
-    var morningIcon = icons[1];
-    var afternoonIcon = icons[2];
-    var eveningIcon = icons[3];
-    setNightIcon(nightIcon);
-    setMorningIcon(morningIcon);
-    setAfternoonIcon(afternoonIcon);
-    setEveningIcon(eveningIcon);
-  }, [threeDaysWeather]);
-
-  moment.locale("sv");
-  var threeDays = moment().add(3, "days").format("L");
-
-  const handleWeatherInformation = (threeDaysWeather) => {
-    setCurrentWeatherInformationShorter(threeDaysWeather);
+  const handleWeatherInformation = (weather) => {
+    setCurrentWeatherInformationShorter(weather);
     setCurrentDayInformation(dayName);
     setCurrentDateInformation(date);
     setCurrentMonthInformation(month);
@@ -88,62 +69,24 @@ const ThreeDays = ({
     document.body.style.overflow = "hidden";
   };
 
-  const timeNow = moment().format("HH:mm");
-
-  useEffect(() => {
-    if (timeNow > "08:00") {
-      document.body.style.backgroundColor = "rgb(13, 165, 206)";
-      setCustomClass("container-bg-day-item");
-    }
-    if (timeNow > "22:00" || timeNow < "08:00") {
-      document.body.style.backgroundColor = "rgb(54, 50, 50)";
-      setCustomClass("container-bg-night-item");
-    }
-  }, [timeNow]);
-
   return (
     <div
       className={`weather-item-container border-b-2 text-white cursor-pointer ${customClass}`}
-      onClick={() => handleWeatherInformation(threeDaysWeather)}
+      onClick={() => handleWeatherInformation(weather)}
     >
-      <div className="weather-item-date capitalize">
-        {dayName} {date}. {month}
-      </div>
-      <div className="weather-item-icons">
-        <div className="weather-item-symbol-0">
-          <IconHelperNight nightIcon={nightIcon} />
-        </div>
-        <div className="weather-item-symbol-1">
-          <IconHelperMorning morningIcon={morningIcon} />
-        </div>
-        <div className="weather-item-symbol-2">
-          <IconHelperAfternoon afternoonIcon={afternoonIcon} />
-        </div>
-        <div className="weather-item-symbol-3">
-          <IconHelperEvening eveningIcon={eveningIcon} />
-        </div>
-      </div>
-      <div className="weather-item-forecast">
-        <div className="text-lg">
-          {threeDaysWeatherMaxTemp}°<span className="mx-1">/</span>
-          {threeDaysWeatherMinTemp}°
-        </div>
-        {threeDaysSumRain <= 0 ? (
-          <div className=""></div>
-        ) : (
-          <div className="">{threeDaysSumRain} mm</div>
-        )}
-        <div className="">{maxWindSpeed} m/s</div>
-      </div>
-      <div className="hidden lg:flex items-center justify-end text-sm">
-        <div>Se tid för tid</div>
-        <span className="ml-2">
-          <ArrowForwardIosIcon sx={{ fontSize: 23 }} />
-        </span>
-      </div>
-      <div className="weather-item-readmore text-sm">
-        <ArrowForwardIosIcon />
-      </div>
+      <OneDayItem
+        dayName={dayName}
+        date={date}
+        month={month}
+        nightIcon={nightIcon}
+        morningIcon={morningIcon}
+        afternoonIcon={afternoonIcon}
+        eveningIcon={eveningIcon}
+        weatherMaxTemp={weatherMaxTemp}
+        weatherMinTemp={weatherMinTemp}
+        sumRain={sumRain}
+        maxWindSpeed={maxWindSpeed}
+      />
     </div>
   );
 };

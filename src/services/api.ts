@@ -30,15 +30,14 @@ const getYrTwentyFourHoursData = (lat, lon, setForecastTwentyFourHoursData) => {
         })
 }
 
-const getYrCurrentWeatherData = (lat, lon, setCurrentWeatherTemp, setForecastCurrentDayMinTemp, setForecastCurrentDayMaxTemp, 
+const getYrCurrentWeatherData = (lat, lon, setCurrentWeatherTemp, setForecastCurrentDayMaxTemp, 
     setCurrentWeatherData, setCurrentWeatherIcon, setCurrentWeatherWindSpeed, setCurrentWeatherGust, setCurrentWeatherRain, 
-    setCurrentWindDirection) => {
+    setCurrentWindDirection, setCurrentWeatherUVI, setCurrentWeatherHumidity) => {
     const url = `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${lat}&lon=${lon}`
     fetch(url)
         .then((res) => res.json())
         .then((json) => {
             setCurrentWeatherTemp(json.properties.timeseries[0].data.instant.details.air_temperature.toFixed(0));
-            setForecastCurrentDayMinTemp(json.properties.timeseries[0].data.instant.details.air_temperature_percentile_10.toFixed(0))
             setForecastCurrentDayMaxTemp(json.properties.timeseries[0].data.instant.details.air_temperature_percentile_90.toFixed(0))
             setCurrentWeatherData(json.properties.timeseries[0].data.instant.details);
             setCurrentWeatherIcon(json.properties.timeseries[0].data.next_1_hours.summary.symbol_code)
@@ -46,6 +45,9 @@ const getYrCurrentWeatherData = (lat, lon, setCurrentWeatherTemp, setForecastCur
             setCurrentWeatherGust(json.properties.timeseries[0].data.instant.details.wind_speed_of_gust.toFixed(0))
             setCurrentWeatherRain(json.properties.timeseries[0].data.next_1_hours.details.precipitation_amount.toFixed(0))
             setCurrentWindDirection(json.properties.timeseries[0].data.instant.details.wind_from_direction)
+            setCurrentWeatherData(json.properties.timeseries[0].data);
+            setCurrentWeatherUVI(json.properties.timeseries[0].data.instant.details.ultraviolet_index_clear_sky)
+            setCurrentWeatherHumidity(json.properties.timeseries[0].data.instant.details.relative_humidity.toFixed(0))
         })
 }
 
@@ -55,7 +57,6 @@ const getYrWeekWeatherData = (lat, lon, setForecastWeekData) => {
         .then((res) => res.json())
         .then((json) => {
             setForecastWeekData(json.properties.timeseries);
-            console.log("complete week data", json.properties.timeseries);
         })
 }
 
@@ -92,7 +93,6 @@ const getYrTwoDaysForwardWeatherData = (lat, lon, setTwoDaysForwardWeatherData) 
             item.time.includes(twoDaysForward)
             );
             setTwoDaysForwardWeatherData([...twoDaysForwardFirstTwoValuesData.slice(-2), ...twoDaysForwardRemainingValuesData.slice(0, 22)])
-            console.log("two days from now data", twoDaysForwardRemainingValuesData.slice(0, 22));
         })
 }
 

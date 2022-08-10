@@ -288,14 +288,6 @@ body {
 }
 
 .singleoneweek-title-container {
-    // display: none;
-    
-    // @media (min-width: 1024px) { 
-    //     display: grid;
-    //     grid-template-columns: 0.5fr 0.5fr 2fr 1fr; 
-    //     grid-template-areas: "time weather forecast windDesc";
-    //     padding: 0rem 0.5rem 0.5rem;
-    // }
     display: grid;
     grid-template-columns: 0.5fr 0.5fr 2fr; 
     grid-template-areas: "time weather forecast";
@@ -361,6 +353,7 @@ body {
     align-self: center;
     margin-top: 0.5rem;
 }
+
 .singleoneweek-item-weather {
     display: grid;
     grid-template-columns: 1fr;
@@ -369,6 +362,7 @@ body {
     margin-top: 0.5rem;
 
 }
+
 .singleoneweek-item-forecast {
     display: grid;
     grid-template-columns: 0.75fr 1fr 1fr;
@@ -403,6 +397,7 @@ body {
     }
 
 }
+
 .singleoneweek-item-windDesc {
     display: none;
 

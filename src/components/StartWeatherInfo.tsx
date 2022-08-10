@@ -10,7 +10,6 @@ import SouthIcon from "@mui/icons-material/South";
 
 const StartWeatherInfo = ({
   cityData,
-  forecastCurrentDayMinTemp,
   forecastCurrentDayMaxTemp,
   currentWeatherTemp,
   setLat,
@@ -19,7 +18,7 @@ const StartWeatherInfo = ({
   currentWeatherWindSpeed,
   currentWeatherGust,
   currentWeatherRain,
-  currentWindDirection
+  currentWindDirection,
 }) => {
   moment.locale("sv");
   var t = new Date();
@@ -68,7 +67,11 @@ const StartWeatherInfo = ({
       </div>
       <div className="mt-4 flex items-end ">
         <div className="mr-2 text-3xl ">{forecastCurrentDayMaxTemp}°</div>
-        <div> <span className="text-white">Känns som</span> <span className="">{currentWeatherTemp}</span>°</div>
+        <div>
+          {" "}
+          <span className="text-white">Känns som</span>{" "}
+          <span className="">{currentWeatherTemp}</span>°
+        </div>
       </div>
       <div className="flex items-end ">
         <div className="mr-2 text-3xl">{currentWeatherRain} </div>
@@ -78,11 +81,11 @@ const StartWeatherInfo = ({
         <div className="mr-1 text-3xl">{currentWeatherWindSpeed}</div>
         <div>({currentWeatherGust}) m/s</div>
         <div
-            className="ml-1 self-end"
-            style={{ transform: `rotate(${currentWindDirection}deg)` }}
-          >
-            <SouthIcon fontSize="small" />
-          </div>
+          className="ml-1 self-end"
+          style={{ transform: `rotate(${currentWindDirection}deg)` }}
+        >
+          <SouthIcon fontSize="small" />
+        </div>
       </div>
     </div>
   );
