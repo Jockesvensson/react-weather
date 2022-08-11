@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 import { getGeolocationData } from "../services/api";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import SearchIcon from "@mui/icons-material/Search";
 
-const SearchLocation = ({ searchOpen, setSearchOpen, setLat, setLon }) => {
+const SearchLocation = ({
+  searchOpen,
+  setSearchOpen,
+  setLat,
+  setLon,
+  inputRef,
+}) => {
   const [search, setSearch] = useState<string>("");
-
   const setClass = searchOpen ? "search open" : "search";
   const setInputclass = searchOpen ? "searchinput open" : "searchinput";
-  const setPlayclass = searchOpen ? "playicon open" : "playicon";
+  const setSearchclass = searchOpen ? "searchGo open" : "searchGo";
 
   const searchFilter = () => {
     getGeolocationData(setLat, setLon, search);
@@ -23,22 +28,24 @@ const SearchLocation = ({ searchOpen, setSearchOpen, setLat, setLon }) => {
 
   return (
     <div className={` ${setClass}`}>
-        <div className="relative">
-      <input
-        className={`h-10 px-4 py-2 ml-2 rounded-lg text-black ${setInputclass}`}
-        type="text"
-        placeholder="Sök..."
-        value={search}
-        onChange={(e) => {
-          setSearch(e.target.value);
-        }}
-        onKeyDown={(e) => handleKeyPress(e)}
-      />
-      {/* <PlayArrowIcon
-        className={`absolute top-1/2 left-60 xsm:left-76 -translate-y-1/2 text-black ${setPlayclass}`}
-        sx={{ fontSize: 30, cursor: "pointer" }}
-        onClick={() => searchFilter()}
-      /> */}
+      <div className="relative">
+        <input
+          ref={inputRef}
+          className={`h-10 px-4 py-2 rounded-lg text-black ${setInputclass}`}
+          type="text"
+          placeholder="Sök..."
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+          onKeyDown={(e) => handleKeyPress(e)}
+        />
+        <span
+          className={`absolute h-10 px-4 py-2 text-black cursor-pointer ${setSearchclass}`}
+          onClick={() => searchFilter()}
+        >
+          <SearchIcon sx={{ fontSize: 20, cursor: "pointer" }} />
+        </span>
       </div>
     </div>
   );

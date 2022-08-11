@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import IconHelperNight from "../IconHelpers/IconHelperNight";
 import IconHelperMorning from "../IconHelpers/IconHelperMorning";
 import IconHelperAfternoon from "../IconHelpers/IconHelperAfternoon";
 import IconHelperEvening from "../IconHelpers/IconHelperEvening";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 const OneDayItem = ({
   dayName,
@@ -18,6 +20,30 @@ const OneDayItem = ({
   sumRain,
   maxWindSpeed,
 }) => {
+  const [isFetching, setIsFetching] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsFetching(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isFetching) {
+    return (
+      <Box
+        sx={{
+          gridColumnStart: 1,
+          gridColumnEnd: 12,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   return (
     <>
       <div className="weather-item-date capitalize">

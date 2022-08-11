@@ -39,7 +39,6 @@ const OneWeekWeather = ({
   const [currentMonthInformation, setCurrentMonthInformation] =
     useState<string>("");
   const [customClass, setCustomClass] = useState<string>("");
-
   const timeNow = moment().format("HH:mm");
 
   useEffect(() => {

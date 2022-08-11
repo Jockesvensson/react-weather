@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import moment from "moment";
 import Sunrise from "../assets/sunrise.png";
 import Sunset from "../assets/sunset.png";
-import { customCssFunction } from "../helper/customCssFunctions";
+import { customCssContainerFunction } from "../helper/customCssFunctions";
 
 const SunriseSundown = ({ todaySunriseData, todaySunsetData }) => {
   const [customClass, setCustomClass] = useState<string>("");
@@ -14,7 +14,7 @@ const SunriseSundown = ({ todaySunriseData, todaySunsetData }) => {
   var sunset = moment(tt, "hh:mm").format("HH:mm");
 
   useEffect(() => {
-    customCssFunction(timeNow, setCustomClass);
+    customCssContainerFunction(timeNow, setCustomClass);
   }, [timeNow]);
 
   return (

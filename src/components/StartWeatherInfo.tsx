@@ -7,6 +7,7 @@ import SearchLocation from "./SearchLocation";
 import CloseIcon from "@mui/icons-material/Close";
 import IconHelperStartWeatherInfo from "./IconHelpers/IconHelperStartWeatherInfo";
 import SouthIcon from "@mui/icons-material/South";
+import {useRef} from 'react';
 
 const StartWeatherInfo = ({
   cityData,
@@ -20,15 +21,17 @@ const StartWeatherInfo = ({
   currentWeatherRain,
   currentWindDirection,
 }) => {
+  const [searchOpen, setSearchOpen] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
   moment.locale("sv");
   var t = new Date();
   var day = moment(t, "dddd").format("dddd");
   var time = moment(t, "hh:mm").format("HH:mm");
 
-  const [searchOpen, setSearchOpen] = useState<boolean>(false);
 
   const handleSearch = () => {
     setSearchOpen(!searchOpen);
+    inputRef.current!.focus();
   };
 
   return (
@@ -50,6 +53,7 @@ const StartWeatherInfo = ({
           setSearchOpen={setSearchOpen}
           setLat={setLat}
           setLon={setLon}
+          inputRef={inputRef}
         />
       </div>
       <div className="flex justify-between lg:justify-start items-center">

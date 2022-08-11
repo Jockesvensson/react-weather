@@ -43,11 +43,9 @@ const Startpage = () => {
   const [currentWeatherHumidity, setCurrentWeatherHumidity] =
     useState<number>(0);
   const [sunDate, setSunDate] = useState<string>(moment().format("L"));
-
   const [tomorrowWeatherData, setTomorrowWeatherData] = useState<any>([]);
   const [twoDaysForwardWeatherData, setTwoDaysForwardWeatherData] =
     useState<any>([]);
-
   const [lat, setLat] = useState<string>("62.348157");
   const [lon, setLon] = useState<string>("17.031465");
 

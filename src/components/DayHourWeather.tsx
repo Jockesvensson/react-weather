@@ -4,35 +4,50 @@ import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import moment from "moment";
 import IconHelper from "./IconHelpers/IconHelper";
-import { customCssFunction } from "../helper/customCssFunctions";
+import { customCssContainerFunction } from "../helper/customCssFunctions";
 
 const DayHourWeather = ({ forecastTwentyFourHoursData }) => {
   const [customClass, setCustomClass] = useState<string>("");
+  const [showSlideLeft, setShowSlideLeft] = useState<boolean>(false);
+  const [showSlideRight, setShowSlideRight] = useState<boolean>(true);
   const timeNow = moment().format("HH:mm");
+  const slider = document.getElementById("slider");
 
   const slideLeft = () => {
-    const slider = document.getElementById("slider");
     slider!.scrollLeft = slider!.scrollLeft - 300;
+    if (slider!.scrollLeft <= 300) {
+      setShowSlideLeft(false);
+    }
+    if (slider!.scrollLeft >= 300) {
+      setShowSlideRight(true);
+    }
   };
   const slideRight = () => {
-    const slider = document.getElementById("slider");
     slider!.scrollLeft = slider!.scrollLeft + 300;
+    if (slider!.scrollLeft >= 0) {
+      setShowSlideLeft(true);
+    }
+    if (slider!.scrollLeft >= 300) {
+      setShowSlideRight(false);
+    }
   };
 
   useEffect(() => {
-    customCssFunction(timeNow, setCustomClass);
+    customCssContainerFunction(timeNow, setCustomClass);
   }, [timeNow]);
 
   return (
     <div
       className={`relative grid grid-cols-1 py-4 px-4 ${customClass} border-2 rounded-3xl group`}
     >
-      <div
-        className="bg-white top-1/2 left-1 -translate-y-1/2 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden xsm:group-hover:block"
-        onClick={() => slideLeft()}
-      >
-        <ArrowCircleLeftIcon sx={{ fontSize: 30 }} />
-      </div>
+      {showSlideLeft && (
+        <div
+          className="bg-white top-1/2 left-1 -translate-y-1/2 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden xsm:group-hover:block"
+          onClick={() => slideLeft()}
+        >
+          <ArrowCircleLeftIcon sx={{ fontSize: 30 }} />
+        </div>
+      )}
       <div
         id="slider"
         className="flex gap-3 small:gap-8 overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative"
@@ -76,12 +91,14 @@ const DayHourWeather = ({ forecastTwentyFourHoursData }) => {
           );
         })}
       </div>
-      <div
-        className="bg-white top-1/2 right-1 -translate-y-1/2 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden xsm:group-hover:block"
-        onClick={() => slideRight()}
-      >
-        <ArrowCircleRightIcon sx={{ fontSize: 30 }} />
-      </div>
+      {showSlideRight && (
+        <div
+          className="bg-white top-1/2 right-1 -translate-y-1/2 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden xsm:group-hover:block"
+          onClick={() => slideRight()}
+        >
+          <ArrowCircleRightIcon sx={{ fontSize: 30 }} />
+        </div>
+      )}
     </div>
   );
 };

@@ -17,6 +17,7 @@ body {
 .container-bg-day-item {
     background-color: rgb(125, 211, 252);
     border-color: rgb(186, 230, 253);
+    transition: 0.5s;
 
     &:hover {
         background-color: rgb(160, 223, 252);
@@ -29,6 +30,7 @@ body {
 
 .container-bg-night-item {
     background-color: rgb(138, 149, 156);
+    transition: 0.5s;
 
     &:hover {
         background-color: rgb(160, 168, 173);
@@ -54,11 +56,13 @@ body {
     top: 50%;
     left: 0;
     width: 1px;
+    margin-left: -1rem;
     transform: translateY(-50%) translateX(-100%);
     opacity: 0;
     transition: all 0.5s linear;
 
     &.open {
+        margin-left: 0.5rem;
         left: 2.5rem;
         opacity: 1;
         transform: translateY(-50%);
@@ -70,12 +74,33 @@ body {
     }
 }
 
-.playicon {
+.searchGo {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 1px;
+    margin-left: -1rem;
+    transform: translateY(-50%) translateX(-100%);
     opacity: 0;
     transition: all 0.5s linear;
 
     &.open {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        width: 40px;
+        margin-left: 0.5rem;
+        border: 2px solid lightgray;
+        border-radius: 0 0.5rem 0.5rem 0;
+        left: 14.4rem;
         opacity: 1;
+        transform: translateY(-50%);
+
+        @media (min-width: 450px) { 
+            left: 18rem;
+            width: 40px;
+        }
     }
 }
 

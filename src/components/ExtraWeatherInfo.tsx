@@ -3,7 +3,7 @@ import AirIcon from "@mui/icons-material/Air";
 import OpacityIcon from "@mui/icons-material/Opacity";
 import moment from "moment";
 import { ultravioletFunction } from "../helper/ultravioletFunction";
-import { customCssFunction } from "../helper/customCssFunctions";
+import { customCssContainerFunction } from "../helper/customCssFunctions";
 
 const ExtraWeatherInfo = ({ currentWeatherWindSpeed, currentWeatherUVI, currentWeatherHumidity }) => {
   const [UVIName, setUVIName] = useState<string>("");
@@ -15,7 +15,7 @@ const ExtraWeatherInfo = ({ currentWeatherWindSpeed, currentWeatherUVI, currentW
   }, [currentWeatherUVI]);
 
   useEffect(() => {
-    customCssFunction(timeNow, setCustomClass);
+    customCssContainerFunction(timeNow, setCustomClass);
   }, [timeNow]);
 
   return (
