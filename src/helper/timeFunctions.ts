@@ -28,6 +28,18 @@ export const dayDateFunction = (day, setDayName, setDate, setMonth, forecastWeek
     setWeather(weatherData);
 }
 
+export const finalSixDaysDateFunction = (dayIndex, setDayName, setDate, setMonth, item, setWeather) => {
+    var currentDay = moment().add(dayIndex + 3, "days").format("L");
+    moment.locale("sv");
+    setDayName(moment().add(dayIndex + 3, "days").format("dddd"));
+    setDate(moment().add(dayIndex + 3, "days").format("D"));
+    setMonth(moment().add(dayIndex + 3, "days").format("MMM "));
+    const weatherData = item.filter((item) =>
+      item.time.includes(currentDay)
+    );
+    setWeather(weatherData);
+}
+
 export const todayDateFunction = (setDate, setMonth, setDayName, forecastWeekData, setWeather) => {
     moment.locale("sv");
     var today = moment().format("L");

@@ -37,6 +37,14 @@ body {
     }
 }
 
+.searchWrapper {
+    position: relative;
+
+    &.open {
+        width: 340px;
+    }
+}
+
 .search {
     position: absolute;
     top: 50%;

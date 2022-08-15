@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import SingleOneWeekWeatherItem from "./SingleOneWeekWeatherItem";
 import SingleOneWeekWeatherSunriseSundown from "./SingleOneWeekWeatherSunriseSundown";
@@ -14,16 +14,7 @@ const SingleOneWeekWeather = ({
   sunsetData,
   setSunDate,
 }) => {
-  const [clickedOutside, setClickedOutside] = useState(true);
   const ref = useRef<HTMLInputElement>(null);
-
-  const handleClickOutside = (e) => {
-    if (!ref.current!.contains(e.target)) {
-      setClickedOutside(false);
-    }
-  };
-
-  const handleClickInside = () => setClickedOutside(true);
 
   const handleClose = () => {
     setShowMoreInformation(false);
@@ -31,63 +22,70 @@ const SingleOneWeekWeather = ({
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  });
+    document.addEventListener("click", handleClickedOutside, true);
+  }, []);
 
-  console.log(clickedOutside);
+  const handleClickedOutside = (e) => {
+    if (ref.current! && !ref.current!.contains(e.target)) {
+      setShowMoreInformation(false);
+      document.body.style.overflow = "unset";
+    }
+  };
 
   return (
     <>
-    {clickedOutside &&
-    <div className="z-30 fixed top-0 bottom-0 left-0 right-0">
-      <div className="absolute top-0 bottom-0 left-0 right-0 small:py-4">
-        <div className="flex flex-col justify-center items-center relative min-h-full">
-          <div ref={ref} onClick={handleClickInside} className="mx-auto max-h-screen overflow-y-auto w-full sm:w-11/12 lg:max-w-6xl h-auto relative px-4 small:px-12 lg:px-20 pt-6 pb-10 small:pt-6 small:pb-6 bg-white">
-            <>
-              <div
-                className="absolute top-6 right-4 small:right-12 lg:right-20"
-                onClick={() => handleClose()}
-              >
-                <CloseIcon sx={{ fontSize: 40, cursor: "pointer" }} />
-              </div>
-              <div className="mb-8 text-2xl capitalize">
-                {currentDayInformation} {currentDateInformation}.{" "}
-                {currentMonthInformation}
-              </div>
-              <div className="singleoneweek-title-container pb-2 text-xs xsmall:text-sm sm:text-base border-b-2 border-gray-400 text-gray-500">
-                <div className="singleoneweek-title-time">Tid</div>
-                <div className="singleoneweek-title-weather">Väder</div>
-                <div className="singleoneweek-title-forecast">
-                  <div className="singleoneweek-title-temp">Temp</div>
-                  <div className="singleoneweek-title-rain">Nederbörd mm</div>
-                  <div className="singleoneweek-title-wind">Vind(kast) m/s</div>
-                </div>
-                <div className="singleoneweek-title-windDesc hidden xsmall:block">
-                  Vindbeskrivelse
-                </div>
-              </div>
-              {currentWeatherInformation.map((item, index) => (
+      <div className="z-30 fixed top-0 bottom-0 left-0 right-0">
+        <div className="absolute top-0 bottom-0 left-0 right-0 small:py-4">
+          <div className="flex flex-col justify-center items-center relative min-h-full">
+            <div
+              ref={ref}
+              className="mx-auto max-h-screen overflow-y-auto w-full sm:w-11/12 lg:max-w-6xl h-auto relative px-4 small:px-12 lg:px-20 pt-6 pb-10 small:pt-6 small:pb-6 bg-white"
+            >
+              <>
                 <div
-                  className="singleoneweek-item-container border-b-2 border-gray-400"
-                  key={index}
+                  className="absolute top-6 right-4 small:right-12 lg:right-20"
+                  onClick={() => handleClose()}
                 >
-                  <SingleOneWeekWeatherItem item={item} />
+                  <CloseIcon sx={{ fontSize: 40, cursor: "pointer" }} />
                 </div>
-              ))}
-            </>
-            <SingleOneWeekWeatherSunriseSundown
-              sunriseData={sunriseData}
-              sunsetData={sunsetData}
-              setSunDate={setSunDate}
-              currentWeatherInformation={currentWeatherInformation}
-            />
+                <div className="mb-8 text-2xl capitalize">
+                  {currentDayInformation} {currentDateInformation}.{" "}
+                  {currentMonthInformation}
+                </div>
+                <div className="singleoneweek-title-container pb-2 text-xs xsmall:text-sm sm:text-base border-b-2 border-gray-400 text-gray-500">
+                  <div className="singleoneweek-title-time">Tid</div>
+                  <div className="singleoneweek-title-weather">Väder</div>
+                  <div className="singleoneweek-title-forecast">
+                    <div className="singleoneweek-title-temp">Temp</div>
+                    <div className="singleoneweek-title-rain">Nederbörd mm</div>
+                    <div className="singleoneweek-title-wind">
+                      Vind(kast) m/s
+                    </div>
+                  </div>
+                  <div className="singleoneweek-title-windDesc hidden xsmall:block">
+                    Vindbeskrivelse
+                  </div>
+                </div>
+                {currentWeatherInformation.map((item, index) => (
+                  <div
+                    className="singleoneweek-item-container border-b-2 border-gray-400"
+                    key={index}
+                  >
+                    <SingleOneWeekWeatherItem item={item} />
+                  </div>
+                ))}
+              </>
+              <SingleOneWeekWeatherSunriseSundown
+                sunriseData={sunriseData}
+                sunsetData={sunsetData}
+                setSunDate={setSunDate}
+                currentWeatherInformation={currentWeatherInformation}
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  }
-  </>
+    </>
   );
 };
 

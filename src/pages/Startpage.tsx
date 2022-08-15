@@ -3,6 +3,7 @@ import {
   getCityData,
   getYrCurrentSunriseSunsetData,
   getYrCurrentWeatherData,
+  getYrFinalSixDaysWeatherData,
   getYrSunriseSunsetData,
   getYrTomorrowWeatherData,
   getYrTwentyFourHoursData,
@@ -46,6 +47,9 @@ const Startpage = () => {
   const [tomorrowWeatherData, setTomorrowWeatherData] = useState<any>([]);
   const [twoDaysForwardWeatherData, setTwoDaysForwardWeatherData] =
     useState<any>([]);
+  const [finalSixDaysWeatherData, setFinalSixDaysWeatherData] = useState<any>(
+    []
+  );
   const [lat, setLat] = useState<string>("62.348157");
   const [lon, setLon] = useState<string>("17.031465");
 
@@ -69,6 +73,7 @@ const Startpage = () => {
     getYrWeekWeatherData(lat, lon, setForecastWeekData);
     getYrTomorrowWeatherData(lat, lon, setTomorrowWeatherData);
     getYrTwoDaysForwardWeatherData(lat, lon, setTwoDaysForwardWeatherData);
+    getYrFinalSixDaysWeatherData(lat, lon, setFinalSixDaysWeatherData);
     getYrCurrentSunriseSunsetData(
       lat,
       lon,
@@ -100,6 +105,7 @@ const Startpage = () => {
         forecastWeekData={forecastWeekData}
         tomorrowWeatherData={tomorrowWeatherData}
         twoDaysForwardWeatherData={twoDaysForwardWeatherData}
+        finalSixDaysWeatherData={finalSixDaysWeatherData}
         sunriseData={sunriseData}
         sunsetData={sunsetData}
         setSunDate={setSunDate}

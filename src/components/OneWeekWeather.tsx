@@ -13,11 +13,13 @@ import SevenDays from "./oneWeekDays/SevenDays";
 import EightDays from "./oneWeekDays/EightDays";
 import SingleOneWeekWeatherShorter from "./SingleOneWeekWeatherShorter";
 import { customCssContainerFunction } from "../helper/customCssFunctions";
+import FinalSixDays from "./oneWeekDays/FinalSixDays";
 
 const OneWeekWeather = ({
   forecastWeekData,
   tomorrowWeatherData,
   twoDaysForwardWeatherData,
+  finalSixDaysWeatherData,
   sunriseData,
   sunsetData,
   setSunDate,
@@ -96,7 +98,17 @@ const OneWeekWeather = ({
           setCurrentDateInformation={setCurrentDateInformation}
           setCurrentMonthInformation={setCurrentMonthInformation}
         />
-        <ThreeDays
+        <FinalSixDays
+          finalSixDaysWeatherData={finalSixDaysWeatherData}
+          setCurrentWeatherInformationShorter={
+            setCurrentWeatherInformationShorter
+          }
+          setShowMoreInformationShorter={setShowMoreInformationShorter}
+          setCurrentDayInformation={setCurrentDayInformation}
+          setCurrentDateInformation={setCurrentDateInformation}
+          setCurrentMonthInformation={setCurrentMonthInformation}
+        />
+        {/* <ThreeDays
           forecastWeekData={forecastWeekData}
           setCurrentWeatherInformationShorter={
             setCurrentWeatherInformationShorter
@@ -155,7 +167,7 @@ const OneWeekWeather = ({
           setCurrentDayInformation={setCurrentDayInformation}
           setCurrentDateInformation={setCurrentDateInformation}
           setCurrentMonthInformation={setCurrentMonthInformation}
-        />
+        /> */}
       </div>
       {showMoreInformation && (
         <SingleOneWeekWeather

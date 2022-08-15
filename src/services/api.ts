@@ -96,6 +96,23 @@ const getYrTwoDaysForwardWeatherData = async (lat, lon, setTwoDaysForwardWeather
         })
 }
 
+const getYrFinalSixDaysWeatherData = async (lat, lon, setFinalSixDaysWeatherData) => {
+    const url = `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${lat}&lon=${lon}`
+    await fetch(url)
+        .then((res) => res.json())
+        .then((json) => {
+            moment.locale("sv");
+            var dayData: any = [];
+            let days: any = [];
+            for (let index = 3; index <= 8; index++) {
+                let day = moment().add(index, "days").format("L");
+                dayData.push(json.properties.timeseries.filter((item) => item.time.includes(day)))
+                days.push(day);
+            }
+            setFinalSixDaysWeatherData(dayData);
+        })
+}
+
 const getYrCurrentSunriseSunsetData = async (lat, lon, setTodaySunriseData, setTodaySunsetData, sunTodayDate) => {
     const url = `https://api.met.no/weatherapi/sunrise/2.0/.json?lat=${lat}&lon=${lon}&date=${sunTodayDate}&offset=02:00`
     await fetch(url)
@@ -124,6 +141,7 @@ export {
     getYrWeekWeatherData, 
     getYrTomorrowWeatherData, 
     getYrTwoDaysForwardWeatherData,
+    getYrFinalSixDaysWeatherData,
     getYrCurrentSunriseSunsetData,
     getYrSunriseSunsetData
 }

@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
 import moment from "moment";
-import "moment/locale/sv";
-import { iconsFunctionShorter } from "../../helper/iconFunctions";
-import OneDayItem from "./OneDayItem";
-import { weatherDetailsFunction } from "../../helper/weatherDetailsFunctions";
-import { dayDateFunction } from "../../helper/timeFunctions";
+import React, { useEffect, useState } from "react";
 import { customCssFunction } from "../../helper/customCssFunctions";
+import { iconsFunctionShorter } from "../../helper/iconFunctions";
+import { finalSixDaysDateFunction } from "../../helper/timeFunctions";
+import { weatherDetailsFunction } from "../../helper/weatherDetailsFunctions";
+import OneDayItem from "./OneDayItem";
 
-const EightDays = ({
-  forecastWeekData,
+export const FinalSixDaysItem = ({
+  item,
+  dayIndex,
   setCurrentWeatherInformationShorter,
   setShowMoreInformationShorter,
   setCurrentDayInformation,
@@ -20,7 +20,6 @@ const EightDays = ({
   const [weatherMinTemp, setWeatherMinTemp] = useState<number>(0);
   const [sumRain, setSumRain] = useState<any>([]);
   const [maxWindSpeed, setMaxWindSpeed] = useState<any>([]);
-  const [day, setDay] = useState<number>(8);
   const [dayName, setDayName] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [month, setMonth] = useState<string>("");
@@ -32,16 +31,20 @@ const EightDays = ({
   const timeNow = moment().format("HH:mm");
 
   useEffect(() => {
-    dayDateFunction(
-      day,
+    setWeather(item);
+  }, [item]);
+
+  useEffect(() => {
+    finalSixDaysDateFunction(
+      dayIndex,
       setDayName,
       setDate,
       setMonth,
-      forecastWeekData,
-      setWeather,
+      item,
+      setWeather
     );
     customCssFunction(timeNow, setCustomClass);
-  }, [forecastWeekData, day, timeNow]);
+  }, [item, dayIndex, timeNow]);
 
   useEffect(() => {
     weatherDetailsFunction(
@@ -90,5 +93,3 @@ const EightDays = ({
     </div>
   );
 };
-
-export default EightDays;
