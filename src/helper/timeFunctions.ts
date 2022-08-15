@@ -16,18 +16,6 @@ export const timeFunction = (measureDateSaying, setEndTime) => {
     }
 }
 
-export const dayDateFunction = (day, setDayName, setDate, setMonth, forecastWeekData, setWeather) => {
-    var currentDay = moment().add(day, "days").format("L");
-    moment.locale("sv");
-    setDayName(moment().add(day, "days").format("dddd"));
-    setDate(moment().add(day, "days").format("D"));
-    setMonth(moment().add(day, "days").format("MMM "));
-    const weatherData = forecastWeekData.filter((item) =>
-      item.time.includes(currentDay)
-    );
-    setWeather(weatherData);
-}
-
 export const finalSixDaysDateFunction = (dayIndex, setDayName, setDate, setMonth, item, setWeather) => {
     var currentDay = moment().add(dayIndex + 3, "days").format("L");
     moment.locale("sv");

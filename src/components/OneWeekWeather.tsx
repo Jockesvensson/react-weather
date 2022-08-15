@@ -5,12 +5,6 @@ import SingleOneWeekWeather from "./SingleOneWeekWeather";
 import Today from "./oneWeekDays/Today";
 import Tomorrow from "./oneWeekDays/Tomorrow";
 import TwoDays from "./oneWeekDays/TwoDays";
-import ThreeDays from "./oneWeekDays/ThreeDays";
-import FourDays from "./oneWeekDays/FourDays";
-import FiveDays from "./oneWeekDays/FiveDays";
-import SixDays from "./oneWeekDays/SixDays";
-import SevenDays from "./oneWeekDays/SevenDays";
-import EightDays from "./oneWeekDays/EightDays";
 import SingleOneWeekWeatherShorter from "./SingleOneWeekWeatherShorter";
 import { customCssContainerFunction } from "../helper/customCssFunctions";
 import FinalSixDays from "./oneWeekDays/FinalSixDays";
@@ -108,66 +102,6 @@ const OneWeekWeather = ({
           setCurrentDateInformation={setCurrentDateInformation}
           setCurrentMonthInformation={setCurrentMonthInformation}
         />
-        {/* <ThreeDays
-          forecastWeekData={forecastWeekData}
-          setCurrentWeatherInformationShorter={
-            setCurrentWeatherInformationShorter
-          }
-          setShowMoreInformationShorter={setShowMoreInformationShorter}
-          setCurrentDayInformation={setCurrentDayInformation}
-          setCurrentDateInformation={setCurrentDateInformation}
-          setCurrentMonthInformation={setCurrentMonthInformation}
-        />
-        <FourDays
-          forecastWeekData={forecastWeekData}
-          setCurrentWeatherInformationShorter={
-            setCurrentWeatherInformationShorter
-          }
-          setShowMoreInformationShorter={setShowMoreInformationShorter}
-          setCurrentDayInformation={setCurrentDayInformation}
-          setCurrentDateInformation={setCurrentDateInformation}
-          setCurrentMonthInformation={setCurrentMonthInformation}
-        />
-        <FiveDays
-          forecastWeekData={forecastWeekData}
-          setCurrentWeatherInformationShorter={
-            setCurrentWeatherInformationShorter
-          }
-          setShowMoreInformationShorter={setShowMoreInformationShorter}
-          setCurrentDayInformation={setCurrentDayInformation}
-          setCurrentDateInformation={setCurrentDateInformation}
-          setCurrentMonthInformation={setCurrentMonthInformation}
-        />
-        <SixDays
-          forecastWeekData={forecastWeekData}
-          setCurrentWeatherInformationShorter={
-            setCurrentWeatherInformationShorter
-          }
-          setShowMoreInformationShorter={setShowMoreInformationShorter}
-          setCurrentDayInformation={setCurrentDayInformation}
-          setCurrentDateInformation={setCurrentDateInformation}
-          setCurrentMonthInformation={setCurrentMonthInformation}
-        />
-        <SevenDays
-          forecastWeekData={forecastWeekData}
-          setCurrentWeatherInformationShorter={
-            setCurrentWeatherInformationShorter
-          }
-          setShowMoreInformationShorter={setShowMoreInformationShorter}
-          setCurrentDayInformation={setCurrentDayInformation}
-          setCurrentDateInformation={setCurrentDateInformation}
-          setCurrentMonthInformation={setCurrentMonthInformation}
-        />
-        <EightDays
-          forecastWeekData={forecastWeekData}
-          setCurrentWeatherInformationShorter={
-            setCurrentWeatherInformationShorter
-          }
-          setShowMoreInformationShorter={setShowMoreInformationShorter}
-          setCurrentDayInformation={setCurrentDayInformation}
-          setCurrentDateInformation={setCurrentDateInformation}
-          setCurrentMonthInformation={setCurrentMonthInformation}
-        /> */}
       </div>
       {showMoreInformation && (
         <SingleOneWeekWeather
