@@ -20,10 +20,7 @@ import "moment/locale/sv";
 
 const Startpage = () => {
   const [cityData, setCityData] = useState<any>([]);
-  const [forecastCurrentDayMaxTemp, setForecastCurrentDayMaxTemp] =
-    useState<number>();
   const [currentWeatherData, setCurrentWeatherData] = useState<any>([]);
-  const [currentWeatherTemp, setCurrentWeatherTemp] = useState<any>([]);
   const [forecastTwentyFourHoursData, setForecastTwentyFourHoursData] =
     useState<any>([]);
   const [forecastWeekData, setForecastWeekData] = useState<any>([]);
@@ -34,15 +31,7 @@ const Startpage = () => {
   const [sunTodayDate, setSunTodayDate] = useState<string>(
     moment().format("L")
   );
-  const [currentWeatherIcon, setCurrentWeatherIcon] = useState<string>("");
-  const [currentWeatherWindSpeed, setCurrentWeatherWindSpeed] =
-    useState<string>("");
-  const [currentWeatherGust, setCurrentWeatherGust] = useState<string>("");
-  const [currentWeatherRain, setCurrentWeatherRain] = useState<string>("");
-  const [currentWindDirection, setCurrentWindDirection] = useState<string>("");
   const [currentWeatherUVI, setCurrentWeatherUVI] = useState<number>(0);
-  const [currentWeatherHumidity, setCurrentWeatherHumidity] =
-    useState<number>(0);
   const [sunDate, setSunDate] = useState<string>(moment().format("L"));
   const [tomorrowWeatherData, setTomorrowWeatherData] = useState<any>([]);
   const [twoDaysForwardWeatherData, setTwoDaysForwardWeatherData] =
@@ -59,16 +48,8 @@ const Startpage = () => {
     getYrCurrentWeatherData(
       lat,
       lon,
-      setCurrentWeatherTemp,
-      setForecastCurrentDayMaxTemp,
       setCurrentWeatherData,
-      setCurrentWeatherIcon,
-      setCurrentWeatherWindSpeed,
-      setCurrentWeatherGust,
-      setCurrentWeatherRain,
-      setCurrentWindDirection,
-      setCurrentWeatherUVI,
-      setCurrentWeatherHumidity
+      setCurrentWeatherUVI
     );
     getYrWeekWeatherData(lat, lon, setForecastWeekData);
     getYrTomorrowWeatherData(lat, lon, setTomorrowWeatherData);
@@ -87,16 +68,10 @@ const Startpage = () => {
   return (
     <>
       <StartWeatherInfo
+        currentWeatherData={currentWeatherData}
         cityData={cityData}
-        forecastCurrentDayMaxTemp={forecastCurrentDayMaxTemp}
-        currentWeatherTemp={currentWeatherTemp}
         setLat={setLat}
         setLon={setLon}
-        currentWeatherIcon={currentWeatherIcon}
-        currentWeatherWindSpeed={currentWeatherWindSpeed}
-        currentWeatherGust={currentWeatherGust}
-        currentWeatherRain={currentWeatherRain}
-        currentWindDirection={currentWindDirection}
       />
       <DayHourWeather
         forecastTwentyFourHoursData={forecastTwentyFourHoursData}
@@ -115,9 +90,8 @@ const Startpage = () => {
         todaySunsetData={todaySunsetData}
       />
       <ExtraWeatherInfo
-        currentWeatherWindSpeed={currentWeatherWindSpeed}
+        currentWeatherData={currentWeatherData}
         currentWeatherUVI={currentWeatherUVI}
-        currentWeatherHumidity={currentWeatherHumidity}
       />
     </>
   );

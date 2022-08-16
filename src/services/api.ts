@@ -30,24 +30,13 @@ const getYrTwentyFourHoursData = async (lat, lon, setForecastTwentyFourHoursData
         })
 }
 
-const getYrCurrentWeatherData = async (lat, lon, setCurrentWeatherTemp, setForecastCurrentDayMaxTemp, 
-    setCurrentWeatherData, setCurrentWeatherIcon, setCurrentWeatherWindSpeed, setCurrentWeatherGust, setCurrentWeatherRain, 
-    setCurrentWindDirection, setCurrentWeatherUVI, setCurrentWeatherHumidity) => {
+const getYrCurrentWeatherData = async (lat, lon, setCurrentWeatherData, setCurrentWeatherUVI) => {
     const url = `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${lat}&lon=${lon}`
     await fetch(url)
         .then((res) => res.json())
         .then((json) => {
-            setCurrentWeatherTemp(json.properties.timeseries[0].data.instant.details.air_temperature.toFixed(0));
-            setForecastCurrentDayMaxTemp(json.properties.timeseries[0].data.instant.details.air_temperature_percentile_90.toFixed(0))
-            setCurrentWeatherData(json.properties.timeseries[0].data.instant.details);
-            setCurrentWeatherIcon(json.properties.timeseries[0].data.next_1_hours.summary.symbol_code)
-            setCurrentWeatherWindSpeed(json.properties.timeseries[0].data.instant.details.wind_speed.toFixed(0))
-            setCurrentWeatherGust(json.properties.timeseries[0].data.instant.details.wind_speed_of_gust.toFixed(0))
-            setCurrentWeatherRain(json.properties.timeseries[0].data.next_1_hours.details.precipitation_amount.toFixed(0))
-            setCurrentWindDirection(json.properties.timeseries[0].data.instant.details.wind_from_direction)
-            setCurrentWeatherData(json.properties.timeseries[0].data);
+            setCurrentWeatherData(json.properties.timeseries.slice(0, 1));
             setCurrentWeatherUVI(json.properties.timeseries[0].data.instant.details.ultraviolet_index_clear_sky)
-            setCurrentWeatherHumidity(json.properties.timeseries[0].data.instant.details.relative_humidity.toFixed(0))
         })
 }
 

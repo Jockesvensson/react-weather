@@ -16,6 +16,8 @@ import Moonrain from "../../assets/moonrain.svg";
 import Sunrain from "../../assets/sunrain.svg";
 import Rainandthunder from "../../assets/rainandthunder.svg";
 import Lightrainandthunder from "../../assets/lightrainandthunder.svg";
+import RainShowerDay from "../../assets/rainshowerday.svg";
+import LightRainShowersNight from "../../assets/lightrainshowers_night.svg";
 
 const IconHelperMorning = ({ morningIcon }) => {
   return (
@@ -32,11 +34,29 @@ const IconHelperMorning = ({ morningIcon }) => {
           {morningIcon === "clearsky_night" && (
             <img className="w-10 h-10" src={Halfmoon} alt="hej" />
           )}
+          {morningIcon === "rainshowers_day" && (
+            <img
+              className="w-8 h-8 small:w-10 small:h-10"
+              src={RainShowerDay}
+              alt="hej"
+            />
+          )}
+          {morningIcon === "lightrainshowers_night" && (
+            <img
+              className="w-8 h-8 small:w-10 small:h-10"
+              src={LightRainShowersNight}
+              alt="hej"
+            />
+          )}
           {morningIcon === "partlycloudy_day" && (
             <img className="w-10 h-10" src={Smallsuncloud} alt="hej" />
           )}
           {morningIcon === "lightrainandthunder" && (
-            <img className="w-8 h-8 small:w-10 small:h-10" src={Lightrainandthunder} alt="hej" />
+            <img
+              className="w-8 h-8 small:w-10 small:h-10"
+              src={Lightrainandthunder}
+              alt="hej"
+            />
           )}
           {morningIcon === "fair_day" && (
             <img className="w-10 h-10" src={Bigsuncloud} alt="hej" />
