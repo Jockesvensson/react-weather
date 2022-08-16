@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "moment/locale/sv";
 import moment from "moment";
-import SingleOneWeekWeather from "./SingleOneWeekWeather";
 import Today from "./oneWeekDays/Today";
 import Tomorrow from "./oneWeekDays/Tomorrow";
 import TwoDays from "./oneWeekDays/TwoDays";
-import SingleOneWeekWeatherShorter from "./SingleOneWeekWeatherShorter";
 import { customCssContainerFunction } from "../helper/customCssFunctions";
 import FinalSixDays from "./oneWeekDays/FinalSixDays";
 import SingleDayWeather from "./SingleDayWeather";

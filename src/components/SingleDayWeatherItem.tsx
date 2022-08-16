@@ -4,8 +4,8 @@ import "moment/locale/sv";
 import IconHelper from "./IconHelpers/IconHelper";
 import SouthIcon from "@mui/icons-material/South";
 import WindDescription from "./windDescription/WindDescription";
-import SingleOneWeekWeatherRain from "./SingleOneWeekWeatherRain";
 import { otherWeatherDetailsFunction } from "../helper/weatherDetailsFunctions";
+import SingleDayWeatherRain from "./SingleDayWeatherRain";
 
 const SingleDayWeatherItem = ({ item }) => {
   const t = new Date(item.time);
@@ -51,7 +51,7 @@ const SingleDayWeatherItem = ({ item }) => {
             : null}
           °
         </div>
-        <SingleOneWeekWeatherRain item={item} />
+        <SingleDayWeatherRain item={item} />
         <div className="singleoneweek-item-wind flex">
           <div>
             {item.data.instant.details.wind_speed
