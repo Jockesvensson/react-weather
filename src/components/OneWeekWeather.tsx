@@ -8,6 +8,8 @@ import TwoDays from "./oneWeekDays/TwoDays";
 import SingleOneWeekWeatherShorter from "./SingleOneWeekWeatherShorter";
 import { customCssContainerFunction } from "../helper/customCssFunctions";
 import FinalSixDays from "./oneWeekDays/FinalSixDays";
+import SingleDayWeather from "./SingleDayWeather";
+import OneWeekWeatherHeading from "./OneWeekWeatherHeading";
 
 const OneWeekWeather = ({
   forecastWeekData,
@@ -46,28 +48,7 @@ const OneWeekWeather = ({
       <div
         className={`flex flex-col mt-4 py-4 px-2 sm:px-4 border-2 rounded-3xl text-white ${customClass}`}
       >
-        <div className="oneweekweather-container-desktop text-sm border-b-2">
-          <div className="oneweekweather-item-symbols-headers">
-            <div className="oneweekweather-item-night">Natt</div>
-            <div className="oneweekweather-item-morning">Morgon</div>
-            <div className="oneweekweather-item-afternoon">Efterm.</div>
-            <div className="oneweekweather-item-evening">Kväll</div>
-          </div>
-          <div className="oneweekweather-item-forecast-headers">
-            <div className="oneweekweather-item-temperature">Max/min temp</div>
-            <div className="oneweekweather-item-precipitation">Nederbörd</div>
-            <div className="oneweekweather-item-wind">Vind</div>
-          </div>
-        </div>
-        <div className="oneweekweather-container-mobile text-sm  border-b-2">
-          <div className="oneweekweather-item-mobile">
-            <div className="oneweekweather-item-night">Natt</div>
-            <div className="oneweekweather-item-day">Dag</div>
-            <div className="oneweekweather-item-morning">Morgon</div>
-            <div className="oneweekweather-item-afternoon">Efterm.</div>
-            <div className="oneweekweather-item-evening">Kväll</div>
-          </div>
-        </div>
+        <OneWeekWeatherHeading />
         <Today
           forecastWeekData={forecastWeekData}
           setCurrentWeatherInformation={setCurrentWeatherInformation}
@@ -103,22 +84,14 @@ const OneWeekWeather = ({
           setCurrentMonthInformation={setCurrentMonthInformation}
         />
       </div>
-      {showMoreInformation && (
-        <SingleOneWeekWeather
+      {(showMoreInformation || showMoreInformationShorter) && (
+        <SingleDayWeather
           currentWeatherInformation={currentWeatherInformation}
           setShowMoreInformation={setShowMoreInformation}
-          currentDayInformation={currentDayInformation}
-          currentDateInformation={currentDateInformation}
-          currentMonthInformation={currentMonthInformation}
-          sunriseData={sunriseData}
-          sunsetData={sunsetData}
-          setSunDate={setSunDate}
-        />
-      )}
-      {showMoreInformationShorter && (
-        <SingleOneWeekWeatherShorter
           currentWeatherInformationShorter={currentWeatherInformationShorter}
           setShowMoreInformationShorter={setShowMoreInformationShorter}
+          showMoreInformation={showMoreInformation}
+          showMoreInformationShorter={showMoreInformationShorter}
           currentDayInformation={currentDayInformation}
           currentDateInformation={currentDateInformation}
           currentMonthInformation={currentMonthInformation}

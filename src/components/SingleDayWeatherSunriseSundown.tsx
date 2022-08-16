@@ -3,22 +3,42 @@ import moment from "moment";
 import "moment/locale/sv";
 import Sunrise from "../assets/sunrise.png";
 import Sunset from "../assets/sunset.png";
-import { sunriseSunsetFunction } from "../helper/sunriseSunsetFunctions";
+import {
+  sunriseSunsetFunction,
+  sunriseSunsetShorterFunction,
+} from "../helper/sunriseSunsetFunctions";
 
-const SingleOneWeekWeatherSunriseSundown = ({
+const SingleDayWeatherSunriseSundown = ({
   sunriseData,
   sunsetData,
   setSunDate,
+  currentWeatherInformationShorter,
   currentWeatherInformation,
+  showMoreInformation,
+  showMoreInformationShorter,
 }) => {
   var t = new Date(sunriseData);
   var sunrise = moment(t, "hh:mm").format("HH:mm");
   var tt = new Date(sunsetData);
   var sunset = moment(tt, "hh:mm").format("HH:mm");
 
-  // useEffect(() => {
-  //   sunriseSunsetFunction(currentWeatherInformation, setSunDate);
-  // }, [currentWeatherInformation, setSunDate]);
+  useEffect(() => {
+    if (showMoreInformation) {
+      sunriseSunsetFunction(currentWeatherInformation, setSunDate);
+    }
+    if (showMoreInformationShorter) {
+      sunriseSunsetShorterFunction(
+        currentWeatherInformationShorter,
+        setSunDate
+      );
+    }
+  }, [
+    currentWeatherInformation,
+    currentWeatherInformationShorter,
+    showMoreInformationShorter,
+    showMoreInformation,
+    setSunDate,
+  ]);
 
   return (
     <div className="flex justify-center mt-8 pb-4">
@@ -40,4 +60,4 @@ const SingleOneWeekWeatherSunriseSundown = ({
   );
 };
 
-export default SingleOneWeekWeatherSunriseSundown;
+export default SingleDayWeatherSunriseSundown;
