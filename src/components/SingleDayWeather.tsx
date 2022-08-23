@@ -1,39 +1,46 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import SingleDayWeatherItem from "./SingleDayWeatherItem";
 import SingleDayWeatherSunriseSundown from "./SingleDayWeatherSunriseSundown";
 import SingleDayWeatherHeading from "./SingleDayWeatherHeading";
+import { getClickedWeatherDate } from "../helper/timeFunctions";
 
 const SingleDayWeather = ({
   currentWeatherInformation,
   setShowMoreInformation,
-  currentWeatherInformationShorter,
-  setShowMoreInformationShorter,
   showMoreInformation,
-  showMoreInformationShorter,
-  currentDayInformation,
-  currentDateInformation,
-  currentMonthInformation,
+  // showMoreInformationShorter,
   sunriseData,
   sunsetData,
   setSunDate,
+  cityData,
+  clickedIndex,
 }) => {
+  const [dayName, setDayName] = useState<string>("");
+  const [date, setDate] = useState<string>("");
+  const [month, setMonth] = useState<string>("");
+
   const ref = useRef<HTMLInputElement>(null);
 
   const handleClose = () => {
     setShowMoreInformation(false);
-    setShowMoreInformationShorter(false);
     document.body.style.overflow = "unset";
   };
 
   useEffect(() => {
+    getClickedWeatherDate(
+      setDayName,
+      setDate,
+      setMonth,
+      cityData,
+      clickedIndex
+    );
     document.addEventListener("click", handleClickedOutside, true);
-  }, []);
+  }, [cityData, clickedIndex]);
 
   const handleClickedOutside = (e) => {
     if (ref.current! && !ref.current!.contains(e.target)) {
       setShowMoreInformation(false);
-      setShowMoreInformationShorter(false);
       document.body.style.overflow = "unset";
     }
   };
@@ -53,10 +60,9 @@ const SingleDayWeather = ({
               >
                 <CloseIcon sx={{ fontSize: 40, cursor: "pointer" }} />
               </div>
-              <div className="mb-8 text-2xl capitalize">
-                {currentDayInformation} {currentDateInformation}.{" "}
-                {currentMonthInformation}
-              </div>
+              <h3 className="mb-8 text-2xl capitalize">
+                {dayName} {date}. {month}
+              </h3>
               <SingleDayWeatherHeading />
               {showMoreInformation &&
                 currentWeatherInformation.map((item, index) => (
@@ -64,16 +70,7 @@ const SingleDayWeather = ({
                     className="singleoneweek-item-container border-b-2 border-gray-400"
                     key={index}
                   >
-                    <SingleDayWeatherItem item={item} />
-                  </div>
-                ))}
-              {showMoreInformationShorter &&
-                currentWeatherInformationShorter.map((item, index) => (
-                  <div
-                    className="singleoneweek-item-container border-b-2 border-gray-400"
-                    key={index}
-                  >
-                    <SingleDayWeatherItem item={item} />
+                    <SingleDayWeatherItem item={item} cityData={cityData} />
                   </div>
                 ))}
             </>
@@ -82,11 +79,9 @@ const SingleDayWeather = ({
               sunsetData={sunsetData}
               setSunDate={setSunDate}
               currentWeatherInformation={currentWeatherInformation}
-              currentWeatherInformationShorter={
-                currentWeatherInformationShorter
-              }
               showMoreInformation={showMoreInformation}
-              showMoreInformationShorter={showMoreInformationShorter}
+              // showMoreInformationShorter={showMoreInformationShorter}
+              cityData={cityData}
             />
           </div>
         </div>

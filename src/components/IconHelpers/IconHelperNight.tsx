@@ -18,6 +18,8 @@ import Rainandthunder from "../../assets/rainandthunder.svg";
 import Lightrainandthunder from "../../assets/lightrainandthunder.svg";
 import RainShowerDay from "../../assets/rainshowerday.svg";
 import LightRainShowersNight from "../../assets/lightrainshowers_night.svg";
+import Heavyrainshowersday from "../../assets/heavyrainshowersday.svg";
+import Heavyrainshowersnight from "../../assets/heavyrainshowersnight.svg";
 
 const IconHelperNight = ({ nightIcon }) => {
   return (
@@ -26,73 +28,111 @@ const IconHelperNight = ({ nightIcon }) => {
         <div className="">
           {nightIcon === "" && <div className=""></div>}
           {nightIcon === "clearsky_day" && (
-            <img className="w-10 h-10" src={Sun} alt="hej" />
+            <img className="w-10 h-10" src={Sun} alt="clearsky_day" />
           )}
           {nightIcon === "partlycloudy_night" && (
-            <img className="w-10 h-10" src={Mooncloud} alt="hej" />
+            <img
+              className="w-10 h-10"
+              src={Mooncloud}
+              alt="partlycloudy_night"
+            />
+          )}
+          {nightIcon === "heavyrainshowers_night" && (
+            <img
+              className="w-10 h-10"
+              src={Heavyrainshowersnight}
+              alt="heavyrainshowers_night"
+            />
           )}
           {nightIcon === "clearsky_night" && (
-            <img className="w-10 h-10" src={Halfmoon} alt="hej" />
+            <img className="w-10 h-10" src={Halfmoon} alt="clearsky_night" />
           )}
           {nightIcon === "rainshowers_day" && (
             <img
-              className="w-8 h-8 small:w-10 small:h-10"
+              className="w-10 h-10"
               src={RainShowerDay}
-              alt="hej"
+              alt="rainshowers_day"
             />
           )}
           {nightIcon === "lightrainshowers_night" && (
             <img
-              className="w-8 h-8 small:w-10 small:h-10"
+              className="w-10 h-10"
               src={LightRainShowersNight}
-              alt="hej"
+              alt="lightrainshowers_night"
             />
           )}
           {nightIcon === "partlycloudy_day" && (
-            <img className="w-10 h-10" src={Smallsuncloud} alt="hej" />
+            <img
+              className="w-10 h-10"
+              src={Smallsuncloud}
+              alt="partlycloudy_day"
+            />
           )}
           {nightIcon === "fair_day" && (
-            <img className="w-10 h-10" src={Bigsuncloud} alt="hej" />
+            <img className="w-10 h-10" src={Bigsuncloud} alt="fair_day" />
           )}
           {nightIcon === "lightrainandthunder" && (
             <img
-              className="w-8 h-8 small:w-10 small:h-10"
+              className="w-10 h-10"
               src={Lightrainandthunder}
-              alt="hej"
+              alt="lightrainandthunder"
             />
           )}
           {nightIcon === "cloudy" && (
-            <img className="w-10 h-10" src={Lightcloud} alt="hej" />
+            <img className="w-10 h-10" src={Lightcloud} alt="cloudy" />
           )}
           {nightIcon === "fair_night" && (
-            <img className="w-10 h-10" src={Bigmooncloud} alt="hej" />
+            <img className="w-10 h-10" src={Bigmooncloud} alt="fair_night" />
           )}
           {nightIcon === "heavyrain" && (
-            <img className="w-10 h-10" src={Rain} alt="hej" />
+            <img className="w-10 h-10" src={Rain} alt="heavyrain" />
           )}
           {nightIcon === "rain" && (
-            <img className="w-10 h-10" src={Littlerain} alt="hej" />
+            <img className="w-10 h-10" src={Littlerain} alt="rain" />
           )}
           {nightIcon === "lightrain" && (
-            <img className="w-10 h-10" src={Smallrain} alt="hej" />
+            <img className="w-10 h-10" src={Smallrain} alt="lightrain" />
           )}
           {nightIcon === "fog" && (
-            <img className="w-10 h-10" src={Fog} alt="hej" />
+            <img className="w-10 h-10" src={Fog} alt="fog" />
           )}
           {nightIcon === "heavyrainandthunder" && (
-            <img className="w-10 h-10" src={Heavyrainandthunder} alt="hej" />
+            <img
+              className="w-10 h-10"
+              src={Heavyrainandthunder}
+              alt="heavyrainandthunder"
+            />
           )}
           {nightIcon === "heavyrainshowersandthunder_day" && (
-            <img className="w-10 h-10" src={Sunthunderrain} alt="hej" />
+            <img
+              className="w-10 h-10"
+              src={Sunthunderrain}
+              alt="heavyrainshowersandthunder_day"
+            />
+          )}
+          {nightIcon === "heavyrainshowers_day" && (
+            <img
+              className="w-10 h-10"
+              src={Heavyrainshowersday}
+              alt="heavyrainshowers_day"
+            />
           )}
           {nightIcon === "rainandthunder" && (
-            <img className="w-10 h-10" src={Rainandthunder} alt="hej" />
+            <img
+              className="w-10 h-10"
+              src={Rainandthunder}
+              alt="rainandthunder"
+            />
           )}
           {nightIcon === "rainshowers_night" && (
-            <img className="w-10 h-10" src={Moonrain} alt="hej" />
+            <img className="w-10 h-10" src={Moonrain} alt="rainshowers_night" />
           )}
           {nightIcon === "lightrainshowers_day" && (
-            <img className="w-10 h-10" src={Sunrain} alt="hej" />
+            <img
+              className="w-10 h-10"
+              src={Sunrain}
+              alt="lightrainshowers_day"
+            />
           )}
         </div>
       ) : (

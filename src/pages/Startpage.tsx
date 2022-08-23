@@ -3,11 +3,8 @@ import {
   getCityData,
   getYrCurrentSunriseSunsetData,
   getYrCurrentWeatherData,
-  getYrFinalSixDaysWeatherData,
   getYrSunriseSunsetData,
-  getYrTomorrowWeatherData,
   getYrTwentyFourHoursData,
-  getYrTwoDaysForwardWeatherData,
   getYrWeekWeatherData,
 } from "../services/api";
 import DayHourWeather from "../components/DayHourWeather";
@@ -17,9 +14,11 @@ import SunriseSundown from "../components/SunriseSundown";
 import StartWeatherInfo from "../components/StartWeatherInfo";
 import moment from "moment";
 import "moment/locale/sv";
+import SearchLocation from "../components/SearchLocation";
 
 const Startpage = () => {
   const [cityData, setCityData] = useState<any>([]);
+  const [countryData, setCountryData] = useState<any>([]);
   const [currentWeatherData, setCurrentWeatherData] = useState<any>([]);
   const [forecastTwentyFourHoursData, setForecastTwentyFourHoursData] =
     useState<any>([]);
@@ -33,17 +32,25 @@ const Startpage = () => {
   );
   const [currentWeatherUVI, setCurrentWeatherUVI] = useState<number>(0);
   const [sunDate, setSunDate] = useState<string>(moment().format("L"));
-  const [tomorrowWeatherData, setTomorrowWeatherData] = useState<any>([]);
-  const [twoDaysForwardWeatherData, setTwoDaysForwardWeatherData] =
-    useState<any>([]);
-  const [finalSixDaysWeatherData, setFinalSixDaysWeatherData] = useState<any>(
-    []
-  );
+
+  //MATFORS
   const [lat, setLat] = useState<string>("62.348157");
   const [lon, setLon] = useState<string>("17.031465");
 
-  useEffect(() => {
-    getCityData(setCityData, lat, lon);
+  //ÅBO
+  // const [lat, setLat] = useState<string>("60.454510");
+  // const [lon, setLon] = useState<string>("22.264824");
+
+  //Atlanta
+  // const [lat, setLat] = useState<string>("33.753746");
+  // const [lon, setLon] = useState<string>("-84.386330");
+
+  //TOKYO
+  //  const [lat, setLat] = useState<string>("35.652832");
+  //  const [lon, setLon] = useState<string>("139.839478");
+
+  const callApi = () => {
+    getCityData(setCityData, lat, lon, setCountryData);
     getYrTwentyFourHoursData(lat, lon, setForecastTwentyFourHoursData);
     getYrCurrentWeatherData(
       lat,
@@ -52,42 +59,62 @@ const Startpage = () => {
       setCurrentWeatherUVI
     );
     getYrWeekWeatherData(lat, lon, setForecastWeekData);
-    getYrTomorrowWeatherData(lat, lon, setTomorrowWeatherData);
-    getYrTwoDaysForwardWeatherData(lat, lon, setTwoDaysForwardWeatherData);
-    getYrFinalSixDaysWeatherData(lat, lon, setFinalSixDaysWeatherData);
     getYrCurrentSunriseSunsetData(
       lat,
       lon,
       setTodaySunriseData,
       setTodaySunsetData,
-      sunTodayDate
+      sunTodayDate,
+      cityData
     );
-    getYrSunriseSunsetData(lat, lon, setSunriseData, setSunsetData, sunDate);
+    getYrSunriseSunsetData(
+      lat,
+      lon,
+      setSunriseData,
+      setSunsetData,
+      sunDate,
+      cityData
+    );
+  };
+
+  useEffect(() => {
+    callApi();
+  }, [lat, lon, sunDate, sunTodayDate]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      callApi();
+    }, 300000);
+
+    return () => {
+      clearInterval(timer);
+    };
   }, [lat, lon, sunDate, sunTodayDate]);
 
   return (
     <>
+      <SearchLocation setLat={setLat} setLon={setLon} />
       <StartWeatherInfo
         currentWeatherData={currentWeatherData}
         cityData={cityData}
-        setLat={setLat}
-        setLon={setLon}
+        countryData={countryData}
       />
       <DayHourWeather
         forecastTwentyFourHoursData={forecastTwentyFourHoursData}
+        cityData={cityData}
       />
       <OneWeekWeather
         forecastWeekData={forecastWeekData}
-        tomorrowWeatherData={tomorrowWeatherData}
-        twoDaysForwardWeatherData={twoDaysForwardWeatherData}
-        finalSixDaysWeatherData={finalSixDaysWeatherData}
         sunriseData={sunriseData}
         sunsetData={sunsetData}
         setSunDate={setSunDate}
+        cityData={cityData}
       />
       <SunriseSundown
         todaySunriseData={todaySunriseData}
         todaySunsetData={todaySunsetData}
+        cityData={cityData}
+        forecastWeekData={forecastWeekData}
       />
       <ExtraWeatherInfo
         currentWeatherData={currentWeatherData}

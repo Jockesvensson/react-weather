@@ -20,6 +20,9 @@ module.exports = {
       'md': '768px',
       // => @media (min-width: 768px) { ... }
 
+      'xmd': '899px',
+      // => @media (min-width: 899px) { ... }
+
       'lg': '1024px',
       // => @media (min-width: 1024px) { ... }
 
@@ -38,6 +41,12 @@ module.exports = {
         '2/9': '22.22%',
         'custom': '95%',
         '340': '340px',
+      },
+      backgroundColor: {
+        'custom-blue': '#eef6f8'
+      },
+      colors: {
+        'custom-gray': '#56616c',
       }
     },
   },

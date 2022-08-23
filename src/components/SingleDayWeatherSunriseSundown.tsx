@@ -1,59 +1,80 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
 import "moment/locale/sv";
 import Sunrise from "../assets/sunrise.png";
 import Sunset from "../assets/sunset.png";
-import {
-  sunriseSunsetFunction,
-  sunriseSunsetShorterFunction,
-} from "../helper/sunriseSunsetFunctions";
+import { sunriseSunsetFunction } from "../helper/sunriseSunsetFunctions";
 
 const SingleDayWeatherSunriseSundown = ({
   sunriseData,
   sunsetData,
   setSunDate,
-  currentWeatherInformationShorter,
   currentWeatherInformation,
   showMoreInformation,
-  showMoreInformationShorter,
+  cityData,
 }) => {
-  var t = new Date(sunriseData);
-  var sunrise = moment(t, "hh:mm").format("HH:mm");
-  var tt = new Date(sunsetData);
-  var sunset = moment(tt, "hh:mm").format("HH:mm");
+  const [sunrise, setSunrise] = useState<string>("");
+  const [sunset, setSunset] = useState<string>("");
 
   useEffect(() => {
+    var d = new Date();
+    var localTime = d.getTime();
+    var localOffset = d.getTimezoneOffset() * 60000;
+    var utc = localTime + localOffset;
+    var city = utc + 1000 * cityData.timezone;
+    var milliseconds = localTime - city;
+    var timeDiffInHours = milliseconds / 3600000;
+
+    var t = new Date(sunriseData);
+    var tt = new Date(sunsetData);
+
+    if (timeDiffInHours > 0) {
+      setSunrise(
+        moment(t, "hh:mm").subtract("hours", timeDiffInHours).format("HH:mm")
+      );
+      setSunset(
+        moment(tt, "hh:mm").subtract("hours", timeDiffInHours).format("HH:mm")
+      );
+    }
+    if (timeDiffInHours === 0) {
+      setSunrise(moment(t, "hh:mm").format("HH:mm"));
+      setSunset(moment(tt, "hh:mm").format("HH:mm"));
+    }
+    if (timeDiffInHours < 0) {
+      setSunrise(
+        moment(t, "hh:mm").subtract("hours", timeDiffInHours).format("HH:mm")
+      );
+      setSunset(
+        moment(tt, "hh:mm").subtract("hours", timeDiffInHours).format("HH:mm")
+      );
+    }
+
     if (showMoreInformation) {
       sunriseSunsetFunction(currentWeatherInformation, setSunDate);
     }
-    if (showMoreInformationShorter) {
-      sunriseSunsetShorterFunction(
-        currentWeatherInformationShorter,
-        setSunDate
-      );
-    }
   }, [
     currentWeatherInformation,
-    currentWeatherInformationShorter,
-    showMoreInformationShorter,
     showMoreInformation,
     setSunDate,
+    cityData,
+    sunriseData,
+    sunsetData,
   ]);
 
   return (
     <div className="flex justify-center mt-8 pb-4">
       <div className="mx-4">
-        <div className="mb-2">Soluppgång</div>
+        <p className="mb-2">Soluppgång</p>
         <div className="flex items-center">
           <img className="w-8 h-8" src={Sunrise} alt="hej" />
-          <div>{sunrise}</div>
+          <p>{sunrise}</p>
         </div>
       </div>
       <div className="mx-4">
-        <div className="mb-2">Solnedgång</div>
+        <p className="mb-2">Solnedgång</p>
         <div className="flex items-center">
           <img className="w-8 h-8" src={Sunset} alt="hej" />
-          <div>{sunset}</div>
+          <p>{sunset}</p>
         </div>
       </div>
     </div>

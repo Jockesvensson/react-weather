@@ -1,44 +1,68 @@
 import moment from "moment";
 import "moment/locale/sv";
 
-export const iconFunction = (weather, setNightIcon, setMorningIcon, setAfternoonIcon, setEveningIcon) => {
-    var time = moment().format("L");
-    const night = weather.filter((item) =>
-      item.time.includes(time + "T06:00:00Z")
-    );
-    const morning = weather.filter((item) =>
-      item.time.includes(time + "T11:00:00Z")
-    );
-    const afternoon = weather.filter((item) =>
-      item.time.includes(time + "T15:00:00Z")
-    );
-    const evening = weather.filter((item) =>
-      item.time.includes(time + "T21:00:00Z")
-    );
+export const iconFunction = (
+  item,
+  setNightIcon,
+  setMorningIcon,
+  setAfternoonIcon,
+  setEveningIcon,
+  cityData
+) => {
+  var night = item.filter((item) => item.time.includes("00:00:00Z"));
+  var morning = item.filter((item) => item.time.includes("T06:00:00Z"));
+  var afternoon = item.filter((item) => item.time.includes("T12:00:00Z"));
+  var evening = item.map((item) => item);
 
-    if (night.length > 0) {
-      setNightIcon(night[0].data.next_1_hours.summary.symbol_code);
-    } else {
+  if (night.length > 0) {
+    if (night[0].data.next_6_hours === undefined) {
       setNightIcon("");
+    } else if (night[0].data.next_6_hours) {
+      setNightIcon(night[0].data.next_6_hours.summary.symbol_code);
+    } else if (night[0].data.next_1_hours) {
+      setNightIcon(night[0].data.next_1_hours.summary.symbol_code);
     }
-    if (morning.length > 0) {
-      setMorningIcon(morning[0].data.next_1_hours.summary.symbol_code);
-    } else {
+  }
+  if (morning.length > 0) {
+    if (morning[0].data.next_6_hours === undefined) {
       setMorningIcon("");
+    } else if (morning[0].data.next_6_hours) {
+      setMorningIcon(morning[0].data.next_6_hours.summary.symbol_code);
+    } else if (morning[0].data.next_1_hours) {
+      setMorningIcon(morning[0].data.next_1_hours.summary.symbol_code);
     }
-    if (afternoon.length > 0) {
-      setAfternoonIcon(afternoon[0].data.next_1_hours.summary.symbol_code);
-    } else {
+  }
+  if (afternoon.length > 0) {
+    if (afternoon[0].data.next_6_hours === undefined) {
       setAfternoonIcon("");
+    } else if (afternoon[0].data.next_6_hours) {
+      setAfternoonIcon(afternoon[0].data.next_6_hours.summary.symbol_code);
+    } else if (afternoon[0].data.next_1_hours) {
+      setAfternoonIcon(afternoon[0].data.next_1_hours.summary.symbol_code);
     }
-    if (evening.length > 0) {
-      setEveningIcon(evening[0].data.next_1_hours.summary.symbol_code);
-    } else {
+  }
+  if (evening.length > 0) {
+    if (evening[0].data.next_6_hours === undefined) {
       setEveningIcon("");
+    } else if (evening[evening.length - 1].data.next_6_hours) {
+      setEveningIcon(
+        evening[evening.length - 1].data.next_6_hours.summary.symbol_code
+      );
+    } else if (evening[evening.length - 1].data.next_1_hours) {
+      setEveningIcon(
+        evening[evening.length - 1].data.next_1_hours.summary.symbol_code
+      );
     }
-}
+  }
+};
 
-export const iconsFunction = (weather, setNightIcon, setMorningIcon, setAfternoonIcon, setEveningIcon) => {
+export const iconsFunction = (
+  weather,
+  setNightIcon,
+  setMorningIcon,
+  setAfternoonIcon,
+  setEveningIcon
+) => {
   if (weather.length <= 6) {
     const nightIcon = weather
       .slice(2, 3)
@@ -107,18 +131,4 @@ export const iconsFunction = (weather, setNightIcon, setMorningIcon, setAfternoo
     setAfternoonIcon(afternoonIcon[0]);
     setEveningIcon(eveningIcon[0]);
   }
-}
-
-export const iconsFunctionShorter = (weather, setNightIcon, setMorningIcon, setAfternoonIcon, setEveningIcon) => {
-  var icons = weather.map(
-    (item, index) => item.data.next_6_hours.summary.symbol_code
-  );
-  var nightIcon = icons[0];
-  var morningIcon = icons[1];
-  var afternoonIcon = icons[2];
-  var eveningIcon = icons[3];
-  setNightIcon(nightIcon);
-  setMorningIcon(morningIcon);
-  setAfternoonIcon(afternoonIcon);
-  setEveningIcon(eveningIcon);
-}
+};
