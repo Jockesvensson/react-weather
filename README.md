@@ -1,4 +1,4 @@
-# Ett projekt där jag tänkte bygga en fullt fungerade hemsida som vidar väder. Fick stora problem då apiet från Yr som jag använder inte var det mest optimala. 
+Ett projekt där jag tänkte bygga en fullt fungerade hemsida som vidar väder. Fick stora problem då apiet från Yr som jag använder inte var det mest optimala. 
 Tidszoner fungerar inte riktigt 100% överallt. 
 
 # Getting Started with Create React App
