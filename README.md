@@ -1,5 +1,7 @@
 Ett projekt där jag tänkte bygga en fullt fungerade hemsida som vidar väder. Fick stora problem då apiet från Yr som jag använder inte var det mest optimala. 
 Tidszoner fungerar inte riktigt 100% överallt. 
+Skapat med React samt Yr.no öppna api.
+URL: https://jocke-weather.vercel.app/
 
 # Getting Started with Create React App
 
