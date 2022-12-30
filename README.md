@@ -1,5 +1,5 @@
 Ett projekt där jag tänkte bygga en fullt fungerade hemsida som vidar väder. Fick stora problem då apiet från Yr som jag använder inte var det mest optimala. 
-Tidszoner fungerar inte riktigt 100% överallt. 
+Tidszoner fungerar inte riktigt 100% överallt. Detta projekt är inte helt klart och jag har tagit en paus från det, så det ligger kommenterad kod/onödig kod på olika ställen kvar.
 Skapat med React samt Yr.no öppna api.
 URL: https://jocke-weather.vercel.app/
 
